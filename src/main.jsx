@@ -6,7 +6,7 @@ import "./CSS/Login.css";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <BrowserRouter basename="/ProjectII">
+      <BrowserRouter>
          <App />
       </BrowserRouter>  
       </React.StrictMode>
