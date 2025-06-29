@@ -1,0 +1,321 @@
+.orderScreen{
+    position: fixed;      /* Giữ cố định trên viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;         /* Chiều rộng viewport */
+    height: 100vh;        /* Chiều cao viewport */
+    background-image: url("/BackgroundLogin.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: -1;     
+}
+/* Toolbar */   
+.toolbar {
+    display: flex;
+    width: 97%;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 5%;
+    left: 1.5%;
+}
+
+/* Tiêu đề */
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+/* Nút bấm */
+.btn {
+    padding: 8px 12px;
+    border: none;
+    margin: 2px;
+    border-radius: 5px;
+    height: 40px;
+    width: 120px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    background: #dc3545;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+.btn:hover{background: #ff2b40;
+}
+.spacer {
+    flex-grow: 1;
+}
+
+.table{
+    display: flex;
+    background-color: white;
+    height: 85%;
+    width: 70%;
+    position: fixed;
+    top: 13%;
+    left: 1.5%;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 20px;
+}
+.detail{
+    background-color: white;
+    height: 85%;
+    width: 26%;
+    position: fixed;
+    top: 13%;
+    left: 72.5%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center; /* căn ngang */
+    align-items: center;     /* căn dọc */
+}
+
+.listOfDishes{
+  background-color: rgb(253, 217, 217);
+  padding: 10px;
+  height: 90%;
+  width: 90%;         /* Giới hạn chiều cao so với phần tử cha (.detail) */
+  overflow-y: auto;    /* Kích hoạt cuộn dọc khi tràn */
+  border-radius: 20px;
+}
+
+.content{
+    background-color: wheat;
+    height: 87%;
+    width: 98%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 20px;
+    margin: auto
+}
+.confirm{
+    align-self: center; /* Căn giữa theo chiều ngang */
+    width: 20%; /* Độ rộng của nút */
+    padding: 10px 20px;
+    border: none;
+    margin: 2px;
+    border-radius: 5px;
+    height: 40px;
+    width: 120px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    background: #dc3545;
+    position: fixed;
+    top: 90%;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.confirm:hover{
+    background: #ff2b40;
+}
+.confirm:focus{
+    outline: none;
+    box-shadow: none;
+}
+.btn:focus{
+    outline: none;
+    box-shadow: none;   
+}
+
+
+/* order table */
+.ordertable {
+    position: fixed;
+    top: 13%;
+    left: 1.5%;
+    width: 70%;
+    height: 85%;
+    background-color: white;
+    border-radius: 20px;
+    overflow-y: auto; /* Cuộn nếu danh sách dài */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  .table-list-container {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .table-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Gợi ý kích thước mỗi cột */
+    gap: 16px;
+    margin-top: 1rem;
+    padding-left: 25px;
+  }
+  
+  .table-item {
+    width: 120px;
+    text-align: center;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 7px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    background-color: #f7f7f7;
+  }
+  
+  .table-item:hover {
+    border-color: #007bff;
+    background-color: #e0f0ff;
+  }
+  
+  .table-item.selected {
+    border-color: #28a745;
+    background-color: #d4edda;
+  }
+  
+  .table-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+
+  .dish-image {
+    width: 80%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .dish-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các thành phần trong mỗi món */
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin: 10px;
+    width: 90%;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dish-info h4,
+.dish-info p {
+  margin: 4px 0;
+}
+
+.listOfDishes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Căn giữa toàn bộ hàng */
+  gap: 20px;
+  padding: 20px;
+}
+.table2 {
+  display: flex;
+  background-color: white;
+  height: 85%;
+  width: 97%;
+  position: fixed;
+  top: 13%;
+  left: 1.5%;
+  align-items: center; /* center theo chiều dọc */
+  justify-content: center; /* center theo chiều ngang */
+  border-radius: 20px;
+}
+
+.content2 {
+  display: flex;
+  background-color: rgb(253, 217, 217);
+  height: 90%;
+  width: 95%;
+  border-radius: 20px;
+}
+
+.stat {
+  position: absolute;
+  bottom: 10%;
+  right: 53%;
+  height: 80%;  
+  width: 40%;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.headerstat1{
+  font-family: "Be Vietnam Pro";
+  font-size: 2rem;
+  font-weight: bold;
+  color: Black;
+  text-align: center;
+}
+
+.stat2{
+  position: absolute;
+  bottom: 10%;
+  right: 7%;
+  height: 80%;  
+  width: 40%;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+}
+
+.headerstat2{
+  font-family: "Be Vietnam Pro";
+  font-size: 2rem;
+  font-weight: bold;
+  color: Black;
+  text-align: center;
+}
+
+
+.table3{
+  display: flex;
+  background-color: white;
+  height: 85%;
+  width: 97%;
+  position: fixed;
+  top: 13%;
+  left: 1.5%;
+  align-items: center; /* center theo chiều dọc */
+  justify-content: center; /* center theo chiều ngang */
+  border-radius: 20px;
+}
+
+.pay{
+  width: 120px;
+    text-align: center;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 7px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    background-color: #f7f7f7;
+}
+
+.pay:hover {
+  background-color: #e0e0e0;
+  border-color: #888;
+  color: #000;
+}
+
+/* Active - khi nhấn chuột giữ */
+.pay:active {
+  background-color: #ccc;
+  transform: scale(0.98); /* nhẹ nhàng nhấn xuống */
+}

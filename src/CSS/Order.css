@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.container {
+  flex: 1;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  background-image: url("/public/BackgroundOrder.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  }
+  
+  .header {
+    background-color: transparent;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  
+  .food-item {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .food-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .food-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+
+  }
+  
+  .food-price {
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+  }
+  
+
+  .order-button {
+    width: 100%;
+    background-color: #10b981;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, transform 0.1s ease;
+    margin-top: 0.5rem;
+  }
+  
+  .order-button:hover {
+    background-color: #059669;
+  }
+  
+  .order-button:active {
+    background-color: #047857;
+    transform: scale(0.96);
+  }
+  
+  .incre-button,
+  .decre-button {
+    width: 30%;
+    background-color: #fa8909;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, transform 0.1s ease;
+    margin: 0.25rem;
+  }
+  
+  .incre-button:active,
+  .decre-button:active {
+    background-color: #d97706;
+    transform: scale(0.96);
+  }
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+    padding: 0.4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .nav-button {
+    color: white;
+    font-size: 1em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 1.5rem;
+    background-color: rgb(255, 102, 7);
+
+  }
+  
+  .category-header {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    width: 100%;
+  }
+  .category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 2rem;
+    color: #FDF5E6;
+    text-align: center;
+    font-family: 'Be Vietnam Pro';     /* ✅ Căn giữa nội dung */
+  }
+  .line, .line2 {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+
+  .food-item {
+    margin-bottom: 16px; /* hoặc 1rem */
+  }

@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container-cart {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url("/BackgroundOrder.png")
+}
+
+.header-cart {
+  background-color: transparent;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro';
+}
+
+.navbar2{
+  position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+    padding: 0.4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cart-image{
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+.cart-item {
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem; /* ✅ Thêm khoảng cách giữa các item */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.total-price {
+  background-color: #fef3c7; /* vàng nhạt */
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #b45309; /* cam đậm */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} 
+
+p {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1rem;
+  color: #374151; /* Màu xám đậm giống trang Order */
+  line-height: 1.5;
+}
