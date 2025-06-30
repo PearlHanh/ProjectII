@@ -1,5 +1,5 @@
-import Login from "../JSX/Login.jsx";
-import Order from "../JSX/Order.jsx";
+import Login from "./Login.jsx";
+import Order from "./Order.jsx";
 import PrivateRoute  from "./PrivateRoute.jsx";
 import HomePage  from "./HomePage.jsx";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
