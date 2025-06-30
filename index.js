@@ -6,26 +6,21 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+import cors from "cors";
+
+// CORS cấu hình chi tiết
 const corsOptions = {
   origin: "https://hoanganhbui2110.netlify.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  credentials: true,
 };
 
-// ✅ 1. Sử dụng cors middleware toàn cục
+// Áp dụng middleware cors toàn cục
 app.use(cors(corsOptions));
 
-// ✅ 2. Bắt buộc: xử lý preflight request
+// BẮT BUỘC: xử lý preflight OPTIONS cho tất cả routes
 app.options("*", cors(corsOptions));
-app.options("/api/login", (req, res) => {
-  res.set({
-    "Access-Control-Allow-Origin": "https://hoanganhbui2110.netlify.app",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  });
-  res.sendStatus(200);
-});
 // ✅ 3. Body parser
 app.use(express.json());
 // Kết nối đến PostgreSQL
