@@ -18,7 +18,14 @@ app.use(cors(corsOptions));
 
 // ✅ 2. Bắt buộc: xử lý preflight request
 app.options("*", cors(corsOptions));
-
+app.options("/api/login", (req, res) => {
+  res.set({
+    "Access-Control-Allow-Origin": "https://hoanganhbui2110.netlify.app",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  });
+  res.sendStatus(200);
+});
 // ✅ 3. Body parser
 app.use(express.json());
 // Kết nối đến PostgreSQL
