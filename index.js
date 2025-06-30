@@ -25,7 +25,7 @@ db.connect()
   .catch((err) => console.error("❌ Lỗi kết nối PostgreSQL:", err));
 
 // LOGIN
-app.post("/api/login", async (req, res) => {
+app.post("/api/login", cors(),  async (req, res) => {
   const { username, password } = req.body;
   try {
     const result = await db.query(`SELECT * FROM login.username WHERE username = $1 AND password = $2`, [username, password]);
