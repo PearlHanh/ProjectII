@@ -17,7 +17,11 @@ app.use(cors({
 app.options("*", cors());
 
 app.use(express.json());
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://hoanganhbui2110.netlify.app");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
