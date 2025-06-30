@@ -6,7 +6,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://hoanganhbui2110.netlify.app", // hoặc thêm cả 'http://localhost:5173' khi dev
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true}
+));
 app.use(express.json());
 
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
