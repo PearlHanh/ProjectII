@@ -6,35 +6,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+app.use(express.json()); // Phân tích dữ liệu JSON từ body của request
 app.use(cors({
   origin: "https://hoanganhbui2110.netlify.app", // Allow specific origin
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 }));
-
-app.use((req, res, next) => {
+app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "https://hoanganhbui2110.netlify.app");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
-app.options('*', (req, res) => {
-  res.set({
-    'Access-Control-Allow-Origin': 'https://hoanganhbui2110.netlify.app',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  });
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.sendStatus(200);
 });
-app.use((req, res, next) => {
-  console.log(`[${req.method}] ${req.originalUrl}`);
-  next();
-});
-// Ensure preflight requests are handled
-app.options("*", cors());
-app.use(express.json());
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
