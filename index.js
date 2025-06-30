@@ -8,9 +8,7 @@ dotenv.config();
 const app = express();
 app.use(express.json()); // Phân tích dữ liệu JSON từ body của request
 app.use(cors({
-  origin: "https://hoanganhbui2110.netlify.app", // Allow specific origin
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: "https://hoanganhbui2110.netlify.app",
   credentials: true,
 }));
 app.options("*", (req, res) => {
