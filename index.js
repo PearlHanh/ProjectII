@@ -13,8 +13,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
-// Ensure preflight requests are handled
-app.options("*", cors());
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -25,6 +23,10 @@ app.use((req, res, next) => {
   next();
   next();
 });
+
+// Ensure preflight requests are handled
+app.options("*", cors());
+
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
