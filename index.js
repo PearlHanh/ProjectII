@@ -6,15 +6,21 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(express.json()); // Phân tích dữ liệu JSON từ body của request
-app.use(cors({
+const corsOptions = {
   origin: "https://hoanganhbui2110.netlify.app",
-  credentials: true,
-}));
-app.options("*", cors({
-  origin: "https://hoanganhbui2110.netlify.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-}));
+};
+
+// ✅ 1. Sử dụng cors middleware toàn cục
+app.use(cors(corsOptions));
+
+// ✅ 2. Bắt buộc: xử lý preflight request
+app.options("*", cors(corsOptions));
+
+// ✅ 3. Body parser
+app.use(express.json());
 // Kết nối đến PostgreSQL
 // Sử dụng Pool để quản lý kết nối hiệu quả hơn
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
