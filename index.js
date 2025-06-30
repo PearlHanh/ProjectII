@@ -6,12 +6,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.use(cors(
-  {origin: "https://hoanganhbui2110.netlify.app", // Hoặc origin cụ thể: ["https://hoanganhbui2110.netlify.app"]
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }
-));
+app.use(cors({
+  origin: "https://hoanganhbui2110.netlify.app", // Allow specific origin
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+}));
+
+// Ensure preflight requests are handled
+app.options("*", cors());
+
 app.use(express.json());
 
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
@@ -25,7 +29,7 @@ db.connect()
   .catch((err) => console.error("❌ Lỗi kết nối PostgreSQL:", err));
 
 // LOGIN
-app.post("/api/login", cors(),  async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const result = await db.query(`SELECT * FROM login.username WHERE username = $1 AND password = $2`, [username, password]);
