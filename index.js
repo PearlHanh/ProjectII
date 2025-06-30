@@ -9,24 +9,24 @@ const app = express();
 app.use(cors({
   origin: "https://hoanganhbui2110.netlify.app", // Allow specific origin
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 }));
 
-
-app.use(express.json());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://hoanganhbui2110.netlify.app");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
+});
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`);
   next();
 });
-
 // Ensure preflight requests are handled
 app.options("*", cors());
-
+app.use(express.json());
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
