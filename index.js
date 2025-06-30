@@ -10,7 +10,7 @@ app.use(cors({
   origin: "https://hoanganhbui2110.netlify.app", // Allow specific origin
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 // Ensure preflight requests are handled
