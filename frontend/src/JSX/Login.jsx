@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
   const loginOnClick = async () => {
     const res = await fetch("https://projectii-production.up.railway.app/api/login", {  
-      method: "OPTIONS",
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
