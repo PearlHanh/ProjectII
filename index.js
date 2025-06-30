@@ -179,7 +179,6 @@ app.get('/api/statistics/dish', async (req, res) => {
     res.status(500).json({ error: "Lỗi server" });
   }
 });
-app.options('*', cors()); 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`✅ Backend đang chạy tại http://localhost:${PORT}`);
