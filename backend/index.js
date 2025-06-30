@@ -6,8 +6,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-import cors from "cors";
-
 // CORS cấu hình chi tiết
 const corsOptions = {
   origin: "https://hoanganhbui2110.netlify.app",
