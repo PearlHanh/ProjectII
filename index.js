@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors(
-  {origin: "*", // Hoặc origin cụ thể: ["https://hoanganhbui2110.netlify.app"]
+  {origin: "https://hoanganhbui2110.netlify.app", // Hoặc origin cụ thể: ["https://hoanganhbui2110.netlify.app"]
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }
