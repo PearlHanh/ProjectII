@@ -23,7 +23,6 @@ db.connect()
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
-    const query = `SET search_path TO login; SELECT * FROM username WHERE username = $1 AND password = $2`;
     const result = await db.query(`SELECT * FROM login.username WHERE username = $1 AND password = $2`, [username, password]);
     if (result.rows.length > 0) {
       res.json({ success: true, message: "1" });
