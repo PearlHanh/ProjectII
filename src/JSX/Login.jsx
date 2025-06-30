@@ -9,7 +9,7 @@ export default function Login() {
   const [hasBackground, setHasBackground] = useState(true);
   const navigate = useNavigate();
   const loginOnClick = async () => {
-    const res = await fetch("https://projectii-production.up.railway.app/login", {  
+    const res = await fetch("https://projectii-production.up.railway.app/api/login", {  
       method: "POST",
       headers: {
         "Content-Type": "application/json"
