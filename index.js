@@ -7,9 +7,10 @@ dotenv.config();
 
 const app = express();
 app.use(cors(
-  {origin: ["https://hoanganhbui2110.netlify.app"], // ← đúng domain frontend
-    methods: ["GET", "POST", "OPTIONS"],             // ← cho phép các method
-    credentials: true}
+  {origin: "*", // Hoặc origin cụ thể: ["https://hoanganhbui2110.netlify.app"]
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }
 ));
 app.use(express.json());
 
@@ -178,7 +179,7 @@ app.get('/api/statistics/dish', async (req, res) => {
     res.status(500).json({ error: "Lỗi server" });
   }
 });
-app.options('*', cors());
+app.options('*', cors()); 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`✅ Backend đang chạy tại http://localhost:${PORT}`);
