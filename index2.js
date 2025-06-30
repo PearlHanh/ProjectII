@@ -1,5 +1,5 @@
 import express from "express";
-import mysql from "mysql";
+import { Pool } from "pg";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -9,110 +9,100 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Kết nối PostgreSQL cho Order
+const db2 = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
-// Kết nối MySQL cho Order
-const db2 = mysql.createConnection({
-    host: process.env.DB_ORDER_HOST,
-    user: process.env.DB_ORDER_USER,
-    password: process.env.DB_ORDER_PASS,
-    database: process.env.DB_ORDER_NAME,
-  });
-  
-  db2.connect((err) =>{
-    if (err) {
-      console.error("Lỗi kết nối MySQL:", err);
-      return;
-    }
-    console.log("Đã kết nối MySQL!");
-  });
-  
-  // Export ket noi de co the su dung o cac file khac
-export default db2;
+db2.connect()
+  .then(() => console.log("✅ Đã kết nối PostgreSQL Order!"))
+  .catch((err) => console.error("❌ Lỗi kết nối PostgreSQL:", err));
 
-//Lay list cac mon an
-  app.get('/api/orderlist', (req, res) => {
-    const sql = "SELECT * FROM dish";
-    db2.query(sql, (err, result) => {
-      if (err) return res.status(500).json({ error: err });
-      res.json(result); // Trả về dưới dạng array of object (dict)
-    });
-  });
+// ✅ GET danh sách món ăn
+app.get('/api/orderlist', async (req, res) => {
+  try {
+    const result = await db2.query('SELECT * FROM "order".dish');
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi truy vấn:", err);
+    res.status(500).json({ error: "Lỗi server" });
+  }
+});
 
-  // Insert cac mon an cho tung ban sau khi order
-  app.post("/api/ordertable", (req, res) => {
-    let { id_table, id_dish, quantity } = req.body;
-    quantity = typeof quantity === 'number' ? quantity : 0;
+// ✅ POST: đặt món ăn cho từng bàn
+app.post("/api/ordertable", async (req, res) => {
+  let { id_table, id_dish, quantity } = req.body;
+  quantity = typeof quantity === 'number' ? quantity : 0;
 
-    if (!id_table || !id_dish || typeof quantity !== 'number') {
-      return res.status(400).json({ error: "Thiếu dữ liệu cần thiết" });
-    }
-  
-    const sql = `
-      INSERT INTO ordertable (id_table, id_dish, dish_quantity)
-      VALUES (?, ?, ?)
-       ON DUPLICATE KEY UPDATE dish_quantity = dish_quantity + VALUES(dish_quantity)
-    `;
-    
-    db2.query(sql, [id_table, id_dish, quantity], (err, result) => {
-      if (err) {
-        console.error("Lỗi khi insert vào tableorder:", err);
-        return res.status(500).json({ error: "Lỗi khi insert" });
-      }
-    });
-      const updateTotalSql = `
-      INSERT INTO total (id_dish, quantity, time)
-      VALUES (?, ?, NOW())
-      ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)
-    `;
+  if (!id_table || !id_dish || typeof quantity !== 'number') {
+    return res.status(400).json({ error: "Thiếu dữ liệu cần thiết" });
+  }
 
-    db2.query(updateTotalSql, [id_dish, quantity], (err2, result2) => {
-      if (err2) {
-        console.error("Lỗi khi cập nhật bảng total:", err2);
-        return res.status(500).json({ error: "Lỗi khi cập nhật bảng thống kê" });
-      }
-      res.status(200).json({ message: "Đã lưu order thành công" });
-    });
-  });
+  try {
+    await db2.query(`
+      INSERT INTO "order".ordertable (id_table, id_dish, dish_quantity)
+      VALUES ($1, $2, $3)
+      ON CONFLICT (id_table, id_dish)
+      DO UPDATE SET dish_quantity = "order".ordertable.dish_quantity + EXCLUDED.dish_quantity
+    `, [id_table, id_dish, quantity]);
 
+    await db2.query(`
+      INSERT INTO "order".total (id_dish, quantity, time)
+      VALUES ($1, $2, NOW())
+      ON CONFLICT (id_dish, time::date)
+      DO UPDATE SET quantity = "order".total.quantity + EXCLUDED.quantity
+    `, [id_dish, quantity]);
 
-  app.listen(4000, () => {
-    console.log("Backend đang chạy tại http://localhost:4000");
-  });
+    res.status(200).json({ message: "Đã lưu order thành công" });
+  } catch (err) {
+    console.error("Lỗi khi insert:", err);
+    res.status(500).json({ error: "Lỗi server" });
+  }
+});
 
+// ✅ GET order của bàn
+app.get('/api/ordertable/:id_table', async (req, res) => {
+  const id_table = req.params.id_table;
 
-  app.get('/api/ordertable/:id_table', (req, res) => {  
-    const id_table = req.params.id_table;
-    const sql = `
+  try {
+    const result = await db2.query(`
       SELECT o.id_table, o.id_dish, o.dish_quantity,
              d.dish_name, d.dish_cost, d.dish_image
-      FROM ordertable o
-      JOIN dish d ON o.id_dish = d.id_dish
-      WHERE o.id_table = ?
-    `;
-    
-    db2.query(sql, [id_table], (err, results) => {
-      if (err) {
-        console.error("Lỗi khi lấy order:", err);
-        return res.status(500).json({ error: "Lỗi server" });
-      }
-      res.json(results);
-    });
-  });
-  app.get('/api/tablename', (req, res) => {
-    const sql = `SELECT * FROM tablename
-ORDER BY CAST(SUBSTRING(id_table, 3) AS UNSIGNED);`; // Giả sử bảng có tên là tables
-    db2.query(sql, (err, result) => {
-      if (err) {
-        console.error("Lỗi khi lấy danh sách bàn:", err);
-        return res.status(500).json({ error: "Lỗi server" });
-      }
-      res.json(result);
-    });
-  });
+      FROM "order".ordertable o
+      JOIN "order".dish d ON o.id_dish = d.id_dish
+      WHERE o.id_table = $1
+    `, [id_table]);
 
-  app.get('/api/order/:id_table', (req, res) => {
-    const id_table = req.params.id_table;
-    const query = `
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi khi lấy order:", err);
+    res.status(500).json({ error: "Lỗi server" });
+  }
+});
+
+// ✅ GET danh sách bàn
+app.get('/api/tablename', async (req, res) => {
+  try {
+    const result = await db2.query(`
+      SELECT * FROM "order".tablename
+      ORDER BY CAST(SUBSTRING(id_table FROM 3) AS INTEGER)
+    `);
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi khi lấy danh sách bàn:", err);
+    res.status(500).json({ error: "Lỗi server" });
+  }
+});
+
+// ✅ GET chi tiết order và tổng giá
+app.get('/api/order/:id_table', async (req, res) => {
+  const id_table = req.params.id_table;
+
+  try {
+    const result = await db2.query(`
       SELECT 
         o.id_dish, 
         d.dish_name, 
@@ -120,63 +110,62 @@ ORDER BY CAST(SUBSTRING(id_table, 3) AS UNSIGNED);`; // Giả sử bảng có t�
         o.dish_quantity,
         d.dish_image,
         (d.dish_cost * o.dish_quantity) AS total_cost
-      FROM ordertable o
-      JOIN dish d ON o.id_dish = d.id_dish
-      WHERE o.id_table = ?
-    `;
-  
-    db2.query(query, [id_table], (err, results) => {
-      if (err) {
-        console.error('Lỗi truy vấn:', err);
-        return res.status(500).json({ error: 'Lỗi máy chủ' });
-      }
-      res.json(results);
-    });
-  });
+      FROM "order".ordertable o
+      JOIN "order".dish d ON o.id_dish = d.id_dish
+      WHERE o.id_table = $1
+    `, [id_table]);
 
-  // lay thong tin so luong mon an ban duoc
-  app.get('/api/statistics/dish', (req, res) => {
-    const period = req.query.period || 'thismonth';
-  
-    let dateCondition = '';
-    switch (period) {
-      case 'premonth': // tháng trước
-        dateCondition = `MONTH(t.time) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH)
-                         AND YEAR(t.time) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)`;
-        break;
-      case 'thisweek':
-        dateCondition = `YEARWEEK(t.time, 1) = YEARWEEK(CURDATE(), 1)`;
-        break;
-      case 'thisday':
-        dateCondition = `DATE(t.time) = CURDATE()`;
-        break;
-      default: // thismonth
-        dateCondition = `MONTH(t.time) = MONTH(CURDATE())
-                         AND YEAR(t.time) = YEAR(CURDATE())`;
-    }
-  
-    const sql = `
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi truy vấn:", err);
+    res.status(500).json({ error: "Lỗi máy chủ" });
+  }
+});
+
+// ✅ GET thống kê món ăn
+app.get('/api/statistics/dish', async (req, res) => {
+  const period = req.query.period || 'thismonth';
+
+  let dateCondition = '';
+  switch (period) {
+    case 'premonth':
+      dateCondition = `EXTRACT(MONTH FROM t.time) = EXTRACT(MONTH FROM CURRENT_DATE - INTERVAL '1 month')
+                       AND EXTRACT(YEAR FROM t.time) = EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL '1 month')`;
+      break;
+    case 'thisweek':
+      dateCondition = `EXTRACT(WEEK FROM t.time) = EXTRACT(WEEK FROM CURRENT_DATE)
+                       AND EXTRACT(YEAR FROM t.time) = EXTRACT(YEAR FROM CURRENT_DATE)`;
+      break;
+    case 'thisday':
+      dateCondition = `DATE(t.time) = CURRENT_DATE`;
+      break;
+    default:
+      dateCondition = `EXTRACT(MONTH FROM t.time) = EXTRACT(MONTH FROM CURRENT_DATE)
+                       AND EXTRACT(YEAR FROM t.time) = EXTRACT(YEAR FROM CURRENT_DATE)`;
+  }
+
+  try {
+    const result = await db2.query(`
       SELECT 
         t.id_dish, 
         d.dish_name, 
         d.dish_image, 
         SUM(t.quantity) AS total_quantity,
         (d.dish_cost * SUM(t.quantity)) AS total_cost
-      FROM total t
-      JOIN dish d ON t.id_dish = d.id_dish
+      FROM "order".total t
+      JOIN "order".dish d ON t.id_dish = d.id_dish
       WHERE ${dateCondition}
-      GROUP BY t.id_dish, d.dish_name, d.dish_image
+      GROUP BY t.id_dish, d.dish_name, d.dish_image, d.dish_cost
       ORDER BY total_quantity DESC
-    `;
-  
-    db2.query(sql, (err, results) => {
-      if (err) {
-        console.error("Lỗi khi lấy thống kê món ăn:", err);
-        return res.status(500).json({ error: "Lỗi server" });
-      }
-      res.json(results); // Trả về array các dict như: { id_dish, dish_name, total_quantity, dish_image }
-    });
-  });
-  
+    `);
 
-  
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi khi lấy thống kê món ăn:", err);
+    res.status(500).json({ error: "Lỗi server" });
+  }
+});
+
+app.listen(4000, () => {
+  console.log("✅ Backend đang chạy tại http://localhost:4000");
+});
