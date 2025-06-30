@@ -11,12 +11,12 @@ app.use(cors({
   origin: "https://hoanganhbui2110.netlify.app",
   credentials: true,
 }));
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://hoanganhbui2110.netlify.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.sendStatus(200);
-});
+app.options("*", cors({
+  origin: "https://hoanganhbui2110.netlify.app",
+  credentials: true
+}));
+// Kết nối đến PostgreSQL
+// Sử dụng Pool để quản lý kết nối hiệu quả hơn
 // Kết nối đến cùng 1 DATABASE_URL nhưng phân biệt schema bằng search_path
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
