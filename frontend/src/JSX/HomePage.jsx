@@ -322,11 +322,10 @@ useEffect(() => {
           <tr>
             <th>ID</th>
             <th>Tên nhân viên</th>
-            <th>Chức vụ</th>
             <th>Ngày sinh</th>
             <th>Giới tính</th>
             <th>Số điện thoại</th>
-            <th>ID Văn phòng</th>
+            <th>ID công việc</th>
             <th></th>
           </tr>
         </thead>
