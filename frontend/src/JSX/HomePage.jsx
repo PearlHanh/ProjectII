@@ -181,8 +181,25 @@ export default function HomePage(){
   <button className='pay'
   onClick={() => {
     const total = orderedDishes.reduce((sum, dish) => sum + dish.total_cost, 0);
-    alert(`Tổng tiền cần thanh toán: ${total.toLocaleString("vi-VN")}đ`);
-  }}>Thanh toán</button>
+    const formattedTotal = total.toLocaleString("vi-VN");
+  
+    if (window.confirm(`Tổng tiền cần thanh toán: ${formattedTotal}đ\nBạn có chắc muốn thanh toán không?`)) {
+      fetch(`/api/ordertable/${selectedTable}`, {
+        method: "DELETE"
+      })
+      .then(res => {
+        if (!res.ok) throw new Error("Lỗi khi xoá order");
+        alert("Thanh toán thành công!");
+        // Gợi ý: reload lại danh sách món đã đặt
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Có lỗi xảy ra khi xoá order.");
+      });
+    }
+  }}
+  
+  >Thanh toán</button>
                                 </div>
                         </div>
                     </div>
