@@ -316,7 +316,8 @@ useEffect(() => {
 />
 */}
 <div>
-      <h2>Danh sách nhân viên</h2>
+  <div className="timekeeping-container">
+      <h4>Danh sách nhân viên</h4>
       <table className="employee-table">
         <thead>
           <tr>
@@ -334,7 +335,7 @@ useEffect(() => {
             <tr key={emp.id_employee}>
               <td>{emp.id_employee}</td>
               <td>{emp.employee_name}</td>
-              <td>{emp.birthday}</td>
+              <td>{dayjs(emp.birthday).format("DD-MM-YYYY")}</td>
               <td>{emp.gender}</td>
               <td>{emp.phone}</td>
               <td>{emp.id_office}</td>
@@ -353,6 +354,7 @@ useEffect(() => {
     </div>
     </div>
             </div>
+        </div>
         </div>
             }
             {activedId === 4 && <div className="historytable">
