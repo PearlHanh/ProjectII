@@ -21,6 +21,9 @@ app.use(express.json());
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
+  max: 20, // Số kết nối tối đa
+  idleTimeoutMillis: 30000, // Thời gian chờ kết nối không hoạt động
+  connectionTimeoutMillis: 2000, // Thời gian chờ kết nối
 });
 
 db.connect()
