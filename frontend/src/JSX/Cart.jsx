@@ -9,7 +9,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCartOrders = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/api/ordertable/TB${tableID}`);
+        const res = await fetch(`https://projectii-production.up.railway.app/api/api/ordertable/TB${tableID}`);
         const data = await res.json();
         setCartOrders(data);
       } catch (error) {

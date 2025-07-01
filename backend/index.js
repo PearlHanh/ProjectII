@@ -91,7 +91,7 @@ app.post("/api/ordertable", async (req, res) => {
     );
 
     return res.status(200).json({ message: "Đã lưu order thành công" });
-  } catch (err) {
+  } catch (err) { 
     console.error("Lỗi khi insert order:", err);
     return res.status(500).json({ error: "Lỗi server" });
   }
