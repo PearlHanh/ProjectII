@@ -328,3 +328,9 @@
   background-color: #ccc;
   transform: scale(0.98); /* nhẹ nhàng nhấn xuống */
 }
+
+.marked {
+  background-color: #a1eafb !important;
+  color: black;
+  border-radius: 50%;
+}
