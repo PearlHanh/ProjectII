@@ -178,7 +178,11 @@ export default function HomePage(){
       </div>
     ))
   )}
-  <button className='pay'>Thanh toán</button>
+  <button className='pay'
+  onClick={() => {
+    const total = orderedDishes.reduce((sum, dish) => sum + dish.total_cost, 0);
+    alert(`Tổng tiền cần thanh toán: ${total.toLocaleString("vi-VN")}đ`);
+  }}>Thanh toán</button>
                                 </div>
                         </div>
                     </div>
