@@ -182,9 +182,13 @@ export default function HomePage(){
   onClick={() => {
     const total = orderedDishes.reduce((sum, dish) => sum + dish.total_cost, 0);
     const formattedTotal = total.toLocaleString("vi-VN");
-  
+    // Kiểm tra nếu không có món nào được đặt
+    if (orderedDishes.length === 0) {
+      alert("Chưa có món nào được đặt.");
+      return;
+    }
     if (window.confirm(`Tổng tiền cần thanh toán: ${formattedTotal}đ\nBạn có chắc muốn thanh toán không?`)) {
-      fetch(`/api/ordertable/delete/${selectedTable}`, {
+      fetch(`https://projectii-production.up.railway.app/api/ordertable/delete/${selectedTable}`, {
         method: "DELETE"
       })
       .then(res => {
