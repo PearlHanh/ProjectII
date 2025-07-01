@@ -146,7 +146,15 @@ export default function HomePage(){
   }
 }, [activedId, revenuePeriod]);
 
+// Lấy danh sách nhân viên
+const [employees, setEmployees] = useState([]);
 
+useEffect(() => {
+  fetch("https://projectii-production.up.railway.app/api/employee")
+    .then((res) => res.json())
+    .then((data) => setEmployees(data))
+    .catch((err) => console.error("Lỗi khi lấy danh sách nhân viên:", err));
+}, []);
 
     return(
     <div className="orderScreen">
@@ -298,13 +306,36 @@ export default function HomePage(){
             {activedId === 3 && <div className="timesheettable">
             <div className="table3">
             <div>
-      <h2>Lịch điểm danh</h2>
-      <Calendar
-        onChange={setValue}
-        value={value}
-        onClickDay={handleClickDay}
-        tileClassName={tileClassName}
-      />
+      {/* <h2>Lịch điểm danh</h2>
+      
+<Calendar
+  onChange={setValue}
+  value={value}
+  onClickDay={handleClickDay}
+  tileClassName={tileClassName}
+/>
+*/}
+<div>
+      <h2>Danh sách nhân viên</h2>
+      <table className="employee-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên nhân viên</th>
+            <th>Chức vụ</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employees.map((emp) => (
+            <tr key={emp.id_employee}>
+              <td>{emp.id_employee}</td>
+              <td>{emp.employee_name}</td>
+              <td>{emp.role}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
     </div>
             </div>
         </div>

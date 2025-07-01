@@ -334,3 +334,21 @@
   color: black;
   border-radius: 50%;
 }
+
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.employee-table th,
+.employee-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.employee-table thead {
+  background-color: #f0f0f0;
+}

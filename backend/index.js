@@ -220,6 +220,16 @@ app.get("/api/statistics/dish", async (req, res) => {
     return res.status(500).json({ error: "Lỗi server" });
   }
 });
+// Lấy danh sách nhân viên
+app.get("/api/employee", async (req, res) => {
+  try {
+    const result = await db.query(`SELECT * FROM login.employee`);
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi khi lấy danh sách nhân viên:", err);
+    return res.status(500).json({ error: "Lỗi server" });
+  }
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
