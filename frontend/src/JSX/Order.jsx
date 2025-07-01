@@ -29,7 +29,7 @@
     useEffect(() => {
       const fetchOrders = async () => {
         try {
-          const res = await fetch("http://localhost:4000/api/orderlist", {
+          const res = await fetch("https://projectii-production.up.railway.app/api/orderlist", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -69,7 +69,7 @@
       };
     
       try {
-        const res = await fetch("http://localhost:4000/api/ordertable", {
+        const res = await fetch("https://projectii-production.up.railway.app/api/ordertable", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
