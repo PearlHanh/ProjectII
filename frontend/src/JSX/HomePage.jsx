@@ -1,8 +1,24 @@
 import "../CSS/HomePage.css"
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 export default function HomePage(){
+  // calendar
+  const [markedDates, setMarkedDates] = useState([]);
+  const [value, setValue] = useState(new Date());
+
+  const tileClassName = ({ date, view }) => {
+      if (view === 'month') {
+        const formatted = dayjs(date).format('YYYY-MM-DD');
+        if (markedDates.includes(formatted)) {
+          return 'marked';
+        }
+      }
+      return null;
+    };
+
     const [activedId, setActiveId] = useState(null);
     const [tables, setTables] = useState([]); // ← Lưu danh sách bàn
     const homeBtn = () => {
@@ -277,6 +293,15 @@ export default function HomePage(){
 
             {activedId === 3 && <div className="timesheettable">
             <div className="table3">
+            <div>
+      <h2>Lịch điểm danh</h2>
+      <Calendar
+        onChange={setValue}
+        value={value}
+        onClickDay={handleClickDay}
+        tileClassName={tileClassName}
+      />
+    </div>
             </div>
         </div>
             }
