@@ -330,7 +330,10 @@ useEffect(() => {
             <tr key={emp.id_employee}>
               <td>{emp.id_employee}</td>
               <td>{emp.employee_name}</td>
-              <td>{emp.role}</td>
+              <td>{emp.birthday}</td>
+              <td>{emp.gender}</td>
+              <td>{emp.phone}</td>
+              <td>{emp.id_office}</td>
               <td>
               <button
                   className="update-button"
