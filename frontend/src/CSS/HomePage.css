@@ -305,12 +305,8 @@
 }
 
 .pay {
-  position: fixed;       /* Cố định vị trí */
-  bottom: 20px;          /* Cách mép dưới 20px */
-  left: 50%;             /* Căn giữa theo chiều ngang */
-  transform: translateX(-50%);  /* Dịch về trái 50% để căn giữa */
-  
   width: 150px;
+  align-self: center; /* Canh giữa nút */
   text-align: center;
   border: 2px solid transparent;
   border-radius: 8px;
@@ -318,9 +314,8 @@
   transition: 0.3s ease;
   cursor: pointer;
   background-color: #f7f7f7;
-  z-index: 999; /* đảm bảo nổi lên trên */
+  margin-top: auto; /* ✅ đẩy nút xuống dưới cùng */
 }
-
 
 .pay:hover {
   background-color: #e0e0e0;
