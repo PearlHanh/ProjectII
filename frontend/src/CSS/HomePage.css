@@ -160,6 +160,7 @@
   }
   
   .table-item {
+    height: 120px;
     width: 120px;
     text-align: center;
     border: 2px solid transparent;
