@@ -19,6 +19,10 @@ export default function HomePage(){
       return null;
     };
 
+    const handleClickDay = (value, event) => {
+      console.log("Ngày bạn đã chọn:", value);
+      // TODO: đánh dấu điểm danh ở đây
+    };
     const [activedId, setActiveId] = useState(null);
     const [tables, setTables] = useState([]); // ← Lưu danh sách bàn
     const homeBtn = () => {
