@@ -297,15 +297,17 @@
   border-radius: 20px;
 }
 
-.pay{
+.pay {
   width: 120px;
-    text-align: center;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    padding: 7px;
-    transition: 0.3s ease;
-    cursor: pointer;
-    background-color: #f7f7f7;
+  align-self: center; /* Canh giữa nút */
+  text-align: center;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 7px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  background-color: #f7f7f7;
+  margin-top: auto; /* ✅ đẩy nút xuống dưới cùng */
 }
 
 .pay:hover {

@@ -172,8 +172,8 @@ export default function HomePage(){
                                         <div className="dish-info">
                                             <h4>{dish.dish_name}</h4>
                                             <p>Số lượng: {dish.dish_quantity}</p>
-                                            <p>Đơn giá: {dish.dish_cost}đ</p>
-                                            <p>Thành tiền: {dish.total_cost}đ</p>
+                                            <p>Đơn giá: {dish.dish_cost.toLocaleString("vi-VN")}đ</p>
+                                            <p>Thành tiền: {dish.total_cost.toLocaleString("vi-VN")}đ</p>
         </div>
       </div>
     ))
