@@ -20,7 +20,7 @@ export default function HomePage(){
         setSelectedTable(id);
         console.log(`Clicked table ${id}`);
         // Gọi API để lấy dữ liệu món ăn theo bàn
-    fetch(`http://localhost:4000/api/order/${id}`)
+    fetch(`https://projectii-production.up.railway.app/api/order/${id}`)
     .then((res) => res.json())
     .then((data) => {
         console.log("Dữ liệu JSON trả về từ server:", data);
@@ -31,7 +31,7 @@ export default function HomePage(){
     
     // useEffect cho tablename
     useEffect(() => {
-        fetch("http://localhost:4000/api/tablename") // Điều chỉnh port nếu khác
+        fetch("https://projectii-production.up.railway.app/api/tablename") // Điều chỉnh port nếu khác
             .then((res) => res.json())
             .then((data) => setTables(data))
             .catch((err) => console.error("Lỗi khi lấy danh sách bàn:", err));
@@ -46,7 +46,7 @@ export default function HomePage(){
 
     useEffect(() => {
       if (activedId === 2) {
-        fetch("http://localhost:4000/api/statistics/dish")
+        fetch("https://projectii-production.up.railway.app/api/statistics/dish")
           .then((res) => res.json())
           .then((data) => {
             const formatted = data.map(item => ({
@@ -63,7 +63,7 @@ export default function HomePage(){
     const [revenueChartData, setRevenueChartData] = useState([]);
     useEffect(() => {
       if (activedId === 2) {
-        fetch("http://localhost:4000/api/statistics/dish")
+        fetch("https://projectii-production.up.railway.app/api/statistics/dish")
           .then((res) => res.json())
           .then((data) => {
             const revenueData = data.map(item => ({
@@ -83,7 +83,7 @@ export default function HomePage(){
     };
     useEffect(() => {
       if (activedId === 2) {
-        fetch(`http://localhost:4000/api/statistics/dish?period=${dishPeriod}`)
+        fetch(`https://projectii-production.up.railway.app/api/statistics/dish?period=${dishPeriod}`)
           .then((res) => res.json())
           .then((data) => {
             const dishData = data.map(item => ({
@@ -111,7 +111,7 @@ export default function HomePage(){
     };
     useEffect(() => {
   if (activedId === 2) {
-    fetch(`http://localhost:4000/api/statistics/dish?period=${revenuePeriod}`)
+    fetch(`https://projectii-production.up.railway.app/api/statistics/dish?period=${revenuePeriod}`)
       .then((res) => res.json())
       .then((data) => {
         const revenueData = data.map(item => ({
