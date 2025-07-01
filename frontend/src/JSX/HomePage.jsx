@@ -151,7 +151,7 @@ export default function HomePage(){
                                             className={`table-item ${selectedTable === table.id_table ? "selected" : ""}`}
                                             onClick={() => handleTableClick(table.id_table)}
                                         >
-                                            <img src={'public/table.png'} alt={table.table_name} className="table-image" />
+                                            <img src={'/table.png'} alt={table.table_name} className="table-image" />
                                             <h2>{table.table_name}</h2>
 
                                         </div>

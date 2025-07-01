@@ -1,7 +1,4 @@
 /* Toàn màn hình */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 #screen{
   position: fixed;      /* Giữ cố định trên viewport */
   top: 0;
