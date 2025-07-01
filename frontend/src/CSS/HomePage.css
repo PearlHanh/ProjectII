@@ -169,6 +169,13 @@
     cursor: pointer;
     background-color: #f7f7f7;
   }
+  .table-item h2 {
+    font-size: 14px;
+    margin-top: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   
   .table-item:hover {
     border-color: #007bff;
