@@ -340,12 +340,13 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  font-size: 24px; /* ⚠️ Gấp ~3 lần kích thước mặc định (~16px → 24px) */
 }
 
 .employee-table th,
 .employee-table td {
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 30px; /* ⚠️ Gấp 3 lần so với 10px */
   text-align: left;
 }
 
