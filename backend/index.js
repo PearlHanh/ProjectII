@@ -97,6 +97,18 @@ app.post("/api/ordertable", async (req, res) => {
   }
 });
 
+// Delete order
+app.delete("/api/ordertable/delete/:id_table", async (req, res) => {
+  const { id_table } = req.params;
+
+  try {
+    await db.query(`DELETE FROM "order".ordertable WHERE id_table = $1`, [id_table]);
+    return res.status(200).json({ message: "Đã xoá order cho bàn " + id_table });
+  } catch (err) {
+    console.error("Lỗi khi xoá order:", err);
+    return res.status(500).json({ error: "Lỗi server" });
+  }
+});
 // ORDER - lấy order theo bàn
 app.get("/api/ordertable/:id_table", async (req, res) => {
   const id_table = req.params.id_table;

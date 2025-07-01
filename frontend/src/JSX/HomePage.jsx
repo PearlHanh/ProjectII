@@ -184,7 +184,7 @@ export default function HomePage(){
     const formattedTotal = total.toLocaleString("vi-VN");
   
     if (window.confirm(`Tổng tiền cần thanh toán: ${formattedTotal}đ\nBạn có chắc muốn thanh toán không?`)) {
-      fetch(`/api/ordertable/${selectedTable}`, {
+      fetch(`/api/ordertable/delete/${selectedTable}`, {
         method: "DELETE"
       })
       .then(res => {
