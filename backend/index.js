@@ -84,7 +84,7 @@ app.post("/api/ordertable", async (req, res) => {
       `
       INSERT INTO "order".total (id_dish, quantity, time)
       VALUES ($1, $2, NOW())
-      ON CONFLICT (id_dish, time::date)
+      ON CONFLICT (id_dish, time)
       DO UPDATE SET quantity = "order".total.quantity + EXCLUDED.quantity
     `,
       [id_dish, quantity]
