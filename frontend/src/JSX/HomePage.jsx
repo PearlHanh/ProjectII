@@ -194,7 +194,8 @@ export default function HomePage(){
       .then(res => {
         if (!res.ok) throw new Error("Lỗi khi xoá order");
         alert("Thanh toán thành công!");
-        // Gợi ý: reload lại danh sách món đã đặt
+        // reload lại danh sách món đã đặt
+        setOrderedDishes([]);
       })
       .catch(err => {
         console.error(err);
