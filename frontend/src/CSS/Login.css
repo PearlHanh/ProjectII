@@ -7,8 +7,7 @@
   height: 100vh;        /* Chiều cao viewport */
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
-  z-index: -1;     
+  background-size: cover;    
 }
 #fullscreen {
   display: flex;
@@ -23,15 +22,17 @@
 /* Container chính */
 .flex-container {
   display: flex;
-  height: 50%;
-  width: 50%;
-
+  height: 60%;
+  width: 60%;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 
 /* Phần ảnh */
 #image-container {
-  width: 100%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -40,7 +41,7 @@
 }
 
 #login-image {
-  width: 100%;
+  width: 50%;
   height: 100%;
   object-fit: cover;
   align-items: center;
