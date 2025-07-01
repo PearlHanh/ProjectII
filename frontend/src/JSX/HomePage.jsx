@@ -331,12 +331,14 @@ useEffect(() => {
               <td>{emp.id_employee}</td>
               <td>{emp.employee_name}</td>
               <td>{emp.role}</td>
+              <td>
               <button
                   className="update-button"
                   onClick={() => handleUpdateClick(emp)}
                 >
                   Cập nhật
                 </button>
+                </td>
             </tr>
           ))}
         </tbody>
