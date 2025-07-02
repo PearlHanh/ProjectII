@@ -287,7 +287,7 @@ app.post("/api/dish/create", async (req, res) => {
 
   try {
     const query = `
-      INSERT INTO dish (id_dish, dish_name, dish_cost, dish_image, type_of_dish, dish_stock)
+      INSERT INTO "order".dish (id_dish, dish_name, dish_cost, dish_image, type_of_dish, dish_stock)
       VALUES ($1, $2, $3, $4, $5, $6)
     `;
     await db.query(query, [id_dish, dish_name,dish_cost, type_of_dish,dish_image, dish_stock]);
