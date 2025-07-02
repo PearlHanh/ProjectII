@@ -678,7 +678,7 @@
 }
 
 .goods-table-wrapper {
-  flex: 0 0 50%;
+  flex: 0 0 100%;
   height: 80%;
   align-self: flex-start;
   width: 100%;
