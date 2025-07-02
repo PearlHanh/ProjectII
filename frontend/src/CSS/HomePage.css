@@ -657,15 +657,15 @@
   gap: 20px; /* khoảng cách giữa 2 cột */
 }
 
+
 .manage-goods,
 .manage-salary {
-  flex: 1;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  overflow-y: auto;
+  flex: 1;               /* hoặc width: 50% nếu không dùng flex */
+  border-radius: 12px;   /* bo góc */
+  background-color: white; /* tuỳ ý */
+  padding: 16px;         /* tuỳ chọn để nội dung đẹp hơn */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* tuỳ chọn */
+  box-sizing: border-box;
 }
 
 
