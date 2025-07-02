@@ -447,8 +447,7 @@
 /* Tab bên phải chiếm phần còn lại */
 .tab-content-box {
   flex: 1;
-  height: 80%;
-  align-self: flex-start;
+  height: 100%;
   overflow-y: auto;
   padding: 16px;
   background-color: #f9f9f9;
@@ -514,4 +513,23 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.tk-btn {
+  position: absolute;
+  bottom: 20px; /* cách đáy 20px */
+  left: 20px;   /* cách trái 20px */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.tk-btn:hover {
+  background-color: #0056b3;
 }
