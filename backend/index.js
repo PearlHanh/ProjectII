@@ -2,8 +2,14 @@ import express from "express";
 import { Pool } from "pg";
 import cors from "cors";
 import dotenv from "dotenv";
-
+import PayOS from "@payos/node";
 dotenv.config();
+
+const payos = new PayOS(
+  process.env.PAYOS_CLIENT_ID,
+  process.env.PAYOS_API_KEY,
+  process.env.PAYOS_CHECKSUM_KEY
+);
 
 const app = express();
 
@@ -46,6 +52,23 @@ app.post("/api/login", async (req, res) => {
   } catch (err) {
     console.error("Lỗi truy vấn login:", err);
     return res.status(500).json({ error: "Lỗi server" });
+  }
+});
+// Tao moi truong test
+app.post("/api/create-payment", async (req, res) => {
+  const { orderCode, amount, description } = req.body;
+  try {
+    const data = await payos.createPaymentLink({
+      orderCode,
+      amount,
+      description,
+      cancelUrl: "https://hoanganhbui2110.netlify.app/homepage",
+      returnUrl: "https://hoanganhbui2110.netlify.app/homepage",
+    });
+    res.json({ checkoutUrl: data.checkoutUrl });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Tạo link thất bại" });
   }
 });
 

@@ -6,10 +6,13 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
+    "@payos/node": "^1.0.10",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "pg": "^8.11.3"
+    "express": "^4.19.2",
+    "pg": "^8.11.3",
+    "axios": "^1.10.0",
+    "payos-checkout": "^1.0.9"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
