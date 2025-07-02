@@ -682,7 +682,6 @@ useEffect(() => {
   )}
               {activedId === 4 && <div className="managetable">
               <div className="table4">
-                <div className="manage-layout">
                   {/* Nửa bên trái */}
                   <div className="manage-goods">
                     {/* Nội dung lịch sử trái */}
@@ -731,7 +730,6 @@ useEffect(() => {
                   {/* Nửa bên phải */}
                   <div className="manage-salary">
                     {/* Nội dung lịch sử phải */}
-                    </div>
                     </div>
                     </div>
                     </div>

@@ -651,12 +651,6 @@
   overflow: hidden;
 }
 
-.manage-layout {
-  display: flex;
-  height: 100%;
-  gap: 20px; /* khoảng cách giữa 2 cột */
-}
-
 
 .manage-goods,
 .manage-salary {
