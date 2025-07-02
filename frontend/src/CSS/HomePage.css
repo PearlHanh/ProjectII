@@ -533,3 +533,21 @@
 .tk-btn:hover {
   background-color: #0056b3;
 }
+
+
+.update-confirm-button {
+  align-self: center; /* căn giữa theo chiều ngang */
+  margin-top: 20px;
+  padding: 10px 24px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.update-confirm-button:hover {
+  background-color: #388e3c;
+}
