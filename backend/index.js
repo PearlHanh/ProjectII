@@ -256,6 +256,17 @@ app.put("/api/employee/:id", async (req, res) => {
     return res.status(500).json({ error: "Lỗi server" });
   }
 });
+// Danh sach office
+app.get("/api/office", async (req, res) => {
+  try {
+    const result = await db.query(`SELECT * FROM login.office`);
+    return res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi khi lấy danh sách office:", err);
+    return res.status(500).json({ error: "Lỗi server" });
+  }
+});
+
 // Lấy danh sách nhân viên
 app.get("/api/employee", async (req, res) => {
   try {

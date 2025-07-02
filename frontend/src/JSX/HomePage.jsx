@@ -231,6 +231,15 @@ const handleConfirmUpdate = () => {
       alert("Lỗi khi cập nhật nhân viên");
     });
 };
+// Lấy danh sách cong viec  
+const [offices, setOffices] = useState([]);
+
+useEffect(() => {
+  fetch("https://projectii-production.up.railway.app/api/office")
+    .then(res => res.json())
+    .then(data => setOffices(data))
+    .catch(err => console.error("Lỗi khi load office:", err));
+}, []);
     return(
     <div className="orderScreen">
         <div className="toolbar">
@@ -494,15 +503,15 @@ const handleConfirmUpdate = () => {
   <div className="form-group">
     <label>Công việc:</label>
     <select
-      value={formData.office_name}
-      onChange={(e) =>
-        setFormData({ ...formData, office_name: e.target.value })
-      }
-    >
-      <option value="Bếp">Bếp</option>
-      <option value="Phục vụ">Phục vụ</option>
-      <option value="Quản lý">Quản lý</option>
-    </select>
+  value={formData.office_name}
+  onChange={e => setFormData({ ...formData, office_name: e.target.value })}
+>
+  {offices.map((office) => (
+    <option key={office.id_office} value={office.office_name}>
+      {office.office_name}
+    </option>
+  ))}
+</select>
   </div>
 </div>
                 <div className="tab-footer">
