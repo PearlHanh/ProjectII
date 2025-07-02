@@ -341,9 +341,10 @@ const handleUpdateClick = (employee) => {
                     <td>{emp.gender}</td>
                     <td>{emp.phone}</td>
                     <td>{emp.office_name}</td>
-                    <td>
+                    <td className="checkbox-cell">
                       <input
                       type="checkbox"
+                      className="large-checkbox"
                       />
                       </td>
                     <td>
