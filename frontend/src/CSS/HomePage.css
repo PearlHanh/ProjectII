@@ -415,11 +415,9 @@
 }
 
 .employee-layout {
-  .employee-layout {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-  }
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 .tab-content-box {
   position: fixed;
