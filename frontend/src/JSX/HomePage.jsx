@@ -814,11 +814,7 @@ const handleSaveEdit = async (id_dish) => {
     >
       Lưu
     </button>
-  ) : (
-    <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-      <Trash className="w-5 h-5" />
-    </button>
-  )}
+  ) : null}
 </td>
               </tr>
             ))}
