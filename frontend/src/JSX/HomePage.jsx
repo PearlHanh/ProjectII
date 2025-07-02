@@ -696,82 +696,85 @@ useEffect(() => {
 
 
 
-              {activedId === 4 && <div className="managetable">
-              <div className="table4">
-                  {/* Nửa bên trái */}
-                    {/* Nội dung lịch sử trái */}
-  <div className="goods-wrapper">
-    <table className="goods-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Tên món</th>
-          <th>Loại</th>
-          <th>Giá</th>
-          <th>Số lượng còn</th>
-          <th>Ảnh</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {dishList.map((dish) => (
-          <tr key={dish.id_dish}>
-            <td>{dish.id_dish}</td>
-            <td>{dish.dish_name}</td>
-            <td>{dish.type_of_dish}</td>
-            <td>{dish.dish_cost.toLocaleString("vi-VN")}đ</td>
-            <td>{dish.dish_stock}</td>
-            <td>
-              <img
-                src={dish.dish_image}
-                alt={dish.dish_name}
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  objectFit: "cover",
-                  borderRadius: "6px",
-                }}
-              />
-            </td>
-            <td><button
-                          className="update2-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        >
-                          <RefreshCcw className="w-5 h-5" />
-                        </button></td>
-            <td>
-            <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"><Trash className="w-5 h-5" />
-</button>
-</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+{activedId === 4 && (
+  <div className="managetable">
+    <div className="table4">
+      {/* Bên trái */}
+      <div className="goods-wrapper">
+        <table className="goods-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên món</th>
+              <th>Loại</th>
+              <th>Giá</th>
+              <th>Số lượng còn</th>
+              <th>Ảnh</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {dishList.map((dish) => (
+              <tr key={dish.id_dish}>
+                <td>{dish.id_dish}</td>
+                <td>{dish.dish_name}</td>
+                <td>{dish.type_of_dish}</td>
+                <td>{dish.dish_cost.toLocaleString("vi-VN")}đ</td>
+                <td>{dish.dish_stock}</td>
+                <td>
+                  <img
+                    src={dish.dish_image}
+                    alt={dish.dish_name}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "cover",
+                      borderRadius: "6px",
+                    }}
+                  />
+                </td>
+                <td>
+                  <button className="update2-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <RefreshCcw className="w-5 h-5" />
+                  </button>
+                </td>
+                <td>
+                  <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    <Trash className="w-5 h-5" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Bên phải - Cùng cấp với goods-wrapper */}
+      <div className="salary-wrapper">
+        <table className="salary-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên nhân viên</th>
+              <th>Ngày</th>
+              <th>Giờ vào</th>
+              <th>Giờ ra</th>
+              <th>Số giờ làm</th>
+              <th>Lương</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Nội dung bảng lương */}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div>
-<div className="salary-wrapper">
-                      <table className="salary-table">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Tên nhân viên</th>
-                            <th>Ngày</th>
-                            <th>Giờ vào</th>
-                            <th>Giờ ra</th>
-                            <th>Số giờ làm</th>
-                            <th>Lương</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          </tbody>
-                          </table>
-                    {/* Nội dung lịch sử phải */}
-                    </div>
-</div>
-              
-              }
-              </div>
-              </div>
-      )   
-  }
+
+      )}
+      </div>
+      </div>
+  );
+}
