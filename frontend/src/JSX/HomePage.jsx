@@ -790,7 +790,6 @@ const handleDeleteDish = async (id_dish) => {
       onChange={(e) =>
         setEditValues({ ...editValues, dish_stock: e.target.value })
       }
-      onBlur={() => handleSaveEdit(dish.id_dish)}
     />
   ) : (
     dish.dish_stock
