@@ -736,7 +736,6 @@ useEffect(() => {
 </div>
 </div>
                   {/* Nửa bên phải */}
-                  <div className="manage-layout-right">
                     <div className="salary-wrapper">
                       <table className="salary-table">
                         <thead>
@@ -755,7 +754,6 @@ useEffect(() => {
                           </tbody>
                           </table>
                     {/* Nội dung lịch sử phải */}
-                    </div>
                     </div>
                     </div>
               }

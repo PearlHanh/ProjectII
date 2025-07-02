@@ -722,3 +722,17 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   box-sizing: border-box;
 }
+
+.salary-wrapper{
+  flex: 1;
+  height: 100%;
+  display: flex;               /* Thêm dòng này */
+  flex-direction: column;      /* Dàn theo cột */
+  justify-content: space-between; /* Đẩy phần footer xuống đáy */
+  padding: 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
