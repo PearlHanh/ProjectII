@@ -157,6 +157,14 @@ useEffect(() => {
     .catch((err) => console.error("Lỗi khi lấy danh sách nhân viên:", err));
 }, []);
 
+
+// Cập nhật thong tin nhân viên
+const [showUpdateTab, setShowUpdateTab] = useState(false);
+const [selectedEmployee, setSelectedEmployee] = useState(null);
+const handleUpdateClick = (emp) => {
+  setSelectedEmployee(emp);
+  setShowUpdateTab(true);
+};
     return(
     <div className="orderScreen">
         <div className="toolbar">
@@ -353,6 +361,23 @@ useEffect(() => {
         </tbody>
       </table>
     </div>
+    {showUpdateTab && selectedEmployee && (
+    <div className="update-tab">
+      <div className="tab-header">
+        <span>Cập nhật: {selectedEmployee.employee_name}</span>
+        <button className="close-button" onClick={() => setShowUpdateTab(false)}>
+          ✕
+        </button>
+      </div>
+      <div className="tab-content">
+        {/* Form hoặc nội dung cập nhật */}
+        <p><strong>ID:</strong> {selectedEmployee.id_employee}</p>
+        <p><strong>Tên:</strong> {selectedEmployee.employee_name}</p>
+        <p><strong>Ngày sinh:</strong> {dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}</p>
+        {/* ... có thể thêm input chỉnh sửa ở đây */}
+      </div>
+    </div>
+  )}
     </div>
             </div>
         </div>
