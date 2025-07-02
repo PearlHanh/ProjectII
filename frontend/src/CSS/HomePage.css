@@ -448,7 +448,9 @@
 .tab-content-box {
   flex: 1;
   height: 100%;
-  overflow-y: auto;
+  display: flex;               /* Thêm dòng này */
+  flex-direction: column;      /* Dàn theo cột */
+  justify-content: space-between; /* Đẩy phần footer xuống đáy */
   padding: 16px;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
@@ -492,6 +494,8 @@
 
 .tab-body p {
   margin: 4px 0;
+  flex: 1;
+  overflow-y: auto;
 }
 .header-employee {
   font-size: 2rem;              /* Tăng kích cỡ */
@@ -536,8 +540,6 @@
 
 
 .update-confirm-button {
-  align-self: center; /* căn giữa theo chiều ngang */
-  margin-top: 20px;
   padding: 10px 24px;
   background-color: #4caf50;
   color: white;
@@ -550,4 +552,10 @@
 
 .update-confirm-button:hover {
   background-color: #388e3c;
+}
+
+.tab-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
 }
