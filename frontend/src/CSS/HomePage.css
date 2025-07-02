@@ -293,15 +293,17 @@
 
 .table3{
   display: flex;
+  flex-direction: row; /* Chia 2 cột ngang */
   background-color: white;
   height: 85%;
   width: 97%;
   position: fixed;
   top: 13%;
   left: 1.5%;
-  align-items: center; /* center theo chiều dọc */
-  justify-content: center; /* center theo chiều ngang */
   border-radius: 20px;
+  overflow-y: auto; /* 👉 Cho phép cuộn dọc */
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .pay {
