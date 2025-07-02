@@ -3,6 +3,7 @@
   import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
   import dayjs from 'dayjs';
   import { RefreshCcw, Trash } from "lucide-react";
+  import { usePayOS, PayOSConfig } from "payos-checkout";
   export default function HomePage(){
     // calendar
     const [markedDates, setMarkedDates] = useState([]);
@@ -455,7 +456,29 @@ const [newDish, setNewDish] = useState({
   dish_image: ""
 });
 
-
+const handlePay = async () => {
+  const total = orderedDishes.reduce((sum, d) => sum + d.total_cost, 0);
+  try {
+    const res = await fetch("/api/create-payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        orderCode: Date.now(),
+        amount: total,
+        description: `Thanh toán bàn ${selectedTable}`,
+      }),
+    });
+    const data = await res.json();
+    if (data.checkoutUrl) {
+      window.location.href = data.checkoutUrl;
+    } else {
+      throw new Error(data.error);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Thanh toán thất bại");
+  }
+};
 
 
       return(
@@ -508,33 +531,47 @@ const [newDish, setNewDish] = useState({
         </div>
       ))
     )}
-    <button className='pay'
-    onClick={() => {
-      const total = orderedDishes.reduce((sum, dish) => sum + dish.total_cost, 0);
-      const formattedTotal = total.toLocaleString("vi-VN");
-      // Kiểm tra nếu không có món nào được đặt
-      if (orderedDishes.length === 0) {
-        alert("Chưa có món nào được đặt.");
-        return;
-      }
-      if (window.confirm(`Tổng tiền cần thanh toán: ${formattedTotal}đ\nBạn có chắc muốn thanh toán không?`)) {
-        fetch(`https://projectii-production.up.railway.app/api/ordertable/delete/${selectedTable}`, {
-          method: "DELETE"
-        })
-        .then(res => {
-          if (!res.ok) throw new Error("Lỗi khi xoá order");
-          alert("Thanh toán thành công!");
-          // reload lại danh sách món đã đặt
-          setOrderedDishes([]);
-        })
-        .catch(err => {
-          console.error(err);
-          alert("Có lỗi xảy ra khi xoá order.");
+   <button
+  className="pay"
+  onClick={async () => {
+    const total = orderedDishes.reduce((sum, dish) => sum + dish.total_cost, 0);
+    const formattedTotal = total.toLocaleString("vi-VN");
+
+    if (orderedDishes.length === 0) {
+      alert("Chưa có món nào được đặt.");
+      return;
+    }
+
+    if (window.confirm(`Tổng tiền cần thanh toán: ${formattedTotal}đ\nBạn có chắc muốn thanh toán không?`)) {
+      try {
+        // 1. Gọi API tạo link thanh toán PayOS test
+        const response = await fetch("https://projectii-production.up.railway.app/api/create-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderCode: Date.now(), // unique cho mỗi đơn
+            amount: total, // số tiền cần thanh toán
+            description: `Thanh toán bàn ${selectedTable}`
+          })
         });
+
+        const data = await response.json();
+        console.log("Link thanh toán:", data);
+        if (data.checkoutUrl) {
+          // 2. Điều hướng sang trang thanh toán PayOS
+          window.location.href = data.checkoutUrl;
+        } else {
+          throw new Error("Không tạo được link thanh toán");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Có lỗi khi tạo thanh toán.");
       }
-    }}
-    
-    >Thanh toán</button>
+    }
+  }}
+>
+  Thanh toán
+</button>
                                   </div>
                           </div>
                       </div>
