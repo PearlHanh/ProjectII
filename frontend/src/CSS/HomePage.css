@@ -293,17 +293,17 @@
 
 .table3{
   display: flex;
-  flex-direction: row; /* Chia 2 cột ngang */
-  background-color: white;
+  flex-direction: row;
   height: 85%;
   width: 97%;
-  position: fixed;
+  position: relative; /* Không phải fixed */
   top: 13%;
   left: 1.5%;
   border-radius: 20px;
-  overflow-y: auto; /* 👉 Cho phép cuộn dọc */
-  padding: 16px;
-  box-sizing: border-box;
+  overflow-y: auto; /* ✅ Cho phép cuộn nếu nội dung dài */
+  background-color: white;
+  padding: 20px;
+  gap: 20px;
 }
 
 .pay {
@@ -442,12 +442,9 @@
 
 /* Bảng bên trái chiếm 65% */
 .table-wrapper {
-  position: fixed;
-  top: 13%;
-  left: 1.5%;
-  width: 60%;
-  height: 85%;
-  overflow-y: auto;
+  flex: 0 0 60%;      /* Chiếm 60% chiều ngang của .table3 */
+  height: 100%;       /* Chiều cao bằng .table3 */
+  overflow-y: auto;   /* ✅ Tạo thanh cuộn bên trong bảng nếu tràn */
   background-color: white;
   padding: 20px;
   border-radius: 12px;
