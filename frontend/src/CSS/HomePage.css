@@ -618,6 +618,21 @@
   border: 1px solid #ccc;
 }
 
+.table3{
+  display: flex;
+  background-color: white;
+  height: 85%;
+  width: 97%;
+  position: fixed;
+  top: 13%;
+  left: 1.5%;
+  align-items: center; /* center theo chiều dọc */
+  justify-content: center; /* center theo chiều ngang */
+  border-radius: 20px;
+  
+  flex-direction: row;
+  overflow: hidden;
+}
 
 
 .table4{
