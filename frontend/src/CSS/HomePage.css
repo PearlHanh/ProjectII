@@ -291,21 +291,7 @@
 }
 
 
-.table3{
-    display: flex;
-    background-color: white;
-    height: 85%;
-    width: 97%;
-    position: fixed;
-    top: 13%;
-    left: 1.5%;
-    align-items: center; /* center theo chiều dọc */
-    justify-content: center; /* center theo chiều ngang */
-    border-radius: 20px;
-    
-    flex-direction: row;
-    overflow: hidden;
-  }
+ 
 
 .pay {
   width: 150px;
@@ -630,4 +616,22 @@
   background-color: #f0f0f0;
   border-radius: 6px;
   border: 1px solid #ccc;
+}
+
+
+
+.table4{
+  display: flex;
+  background-color: white;
+  height: 85%;
+  width: 97%;
+  position: fixed;
+  top: 13%;
+  left: 1.5%;
+  align-items: center; /* center theo chiều dọc */
+  justify-content: center; /* center theo chiều ngang */
+  border-radius: 20px;
+  
+  flex-direction: row;
+  overflow: hidden;
 }

@@ -345,7 +345,7 @@
               <button className="btn home" onClick={()=>{homeBtn; handleButtonClick(1)}}>Home</button>
               <button className="btn goods" onClick={() => handleButtonClick(2)}>Goods</button>
               <button className="btn timesheet" onClick={() => handleButtonClick(3)}>Time Sheet</button>
-              <button className="btn historyBtn" onClick={() => handleButtonClick(4)}>History</button>
+              <button className="btn manageBtn" onClick={() => handleButtonClick(4)}>Manage</button>
               <div className="spacer"></div>
           </div>
 
@@ -653,7 +653,7 @@
         className="update-confirm-button"
         onClick={handleSubmitEmployee}
       >
-        xác nhận
+        Xác nhận chấm công
       </button>
     </div>
   </div>
