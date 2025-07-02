@@ -302,6 +302,9 @@
     align-items: center; /* center theo chiều dọc */
     justify-content: center; /* center theo chiều ngang */
     border-radius: 20px;
+    
+    flex-direction: row;
+    overflow: hidden;
   }
 
 .pay {
@@ -430,7 +433,6 @@
 .table-wrapper {
   flex: 0 0 60%;
   height: 100%;
-  max-width: 60%;
   overflow-y: auto;  /* ✅ Thanh cuộn nếu nội dung quá dài */
   border: 1px solid #ddd;
   border-radius: 12px;
