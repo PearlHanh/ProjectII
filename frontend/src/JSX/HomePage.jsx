@@ -513,7 +513,7 @@ const handleConfirmUpdate = () => {
                 <div className="tab-footer">
                 <button
                   className="update-confirm-button"
-                  onClick={handleUpdateEmployee}
+                  onClick={handleConfirmUpdate}
                   >xác nhận</button>
                   </div>
               </div>
