@@ -361,20 +361,19 @@ const handleUpdateClick = (emp) => {
         </tbody>
       </table>
     </div>
-    {showUpdateTab && selectedEmployee && (
-    <div className="update-tab">
+    {tabType === "update" && selectedEmployee && (
+    <div className="tab-content-box">
       <div className="tab-header">
-        <span>Cập nhật: {selectedEmployee.employee_name}</span>
-        <button className="close-button" onClick={() => setShowUpdateTab(false)}>
-          ✕
-        </button>
+        <span>Cập nhật nhân viên: {selectedEmployee.employee_name}</span>
+        <button onClick={() => setTabType(null)} className="tab-close">✕</button>
       </div>
-      <div className="tab-content">
-        {/* Form hoặc nội dung cập nhật */}
+      <div className="tab-body">
         <p><strong>ID:</strong> {selectedEmployee.id_employee}</p>
         <p><strong>Tên:</strong> {selectedEmployee.employee_name}</p>
         <p><strong>Ngày sinh:</strong> {dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}</p>
-        {/* ... có thể thêm input chỉnh sửa ở đây */}
+        <p><strong>Giới tính:</strong> {selectedEmployee.gender}</p>
+        <p><strong>SDT:</strong> {selectedEmployee.phone}</p>
+        <p><strong>ID công việc:</strong> {selectedEmployee.id_office}</p>
       </div>
     </div>
   )}
