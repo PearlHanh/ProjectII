@@ -374,7 +374,10 @@ const handleUpdateClick = (employee) => {
                   ✕
                 </button>
               </div>
-
+              <button
+                  className="update-confirm-button"
+                  >xác nhận</button>
+                  
               <div className="tab-body">
                 <p>
                   <strong>ID:</strong> {selectedEmployee.id_employee}
@@ -396,10 +399,9 @@ const handleUpdateClick = (employee) => {
                   <strong>ID công việc:</strong> {selectedEmployee.office_name}
                   </p>
                 </div>
-                <button
-                  className="update-confirm-button"
-                  >xác nhận</button>
+
               </div>
+            
           )}
         </div>
       </div>
