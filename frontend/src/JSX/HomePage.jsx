@@ -664,12 +664,20 @@
   )}
               {activedId === 4 && <div className="historytable">
               <div className="table4">
-              </div>
-          </div>
+                <div className="manage-layout">
+                  {/* Nửa bên trái */}
+                  <div className="mamnage-goods">
+                    {/* Nội dung lịch sử trái */}
+                    </div>
+                  {/* Nửa bên phải */}
+                  <div className="manage-salary">
+                    {/* Nội dung lịch sử phải */}
+                    </div>
+                    </div>
+                    </div>
+                    </div>
               }
-
-          
       </div>
   </div>
-      )
+      )   
   }
