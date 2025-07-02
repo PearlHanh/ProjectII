@@ -539,7 +539,7 @@
 .add-employee-button{
   position: absolute;
   bottom: 20px; /* cách đáy 20px */
-  left: 680px;   /* cách trái 20px */
+  left: 570px;   /* cách trái 20px */
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
