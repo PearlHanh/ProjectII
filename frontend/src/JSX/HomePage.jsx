@@ -375,26 +375,39 @@ const handleUpdateClick = (employee) => {
                 </button>
               </div>
               <div className="tab-body">
-                <p>
-                  <strong>ID:</strong> {selectedEmployee.id_employee}
-                </p>
-                <p>
-                  <strong>Tên:</strong> {selectedEmployee.employee_name}
-                </p>
-                <p>
-                  <strong>Ngày sinh:</strong>{" "}
-                  {dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}
-                </p>
-                <p>
-                  <strong>Giới tính:</strong> {selectedEmployee.gender}
-                </p>
-                <p>
-                  <strong>SDT:</strong> {selectedEmployee.phone}
-                </p>
-                <p>
-                  <strong>ID công việc:</strong> {selectedEmployee.office_name}
-                  </p>
-                </div>
+  <div className="form-group">
+    <label>ID:</label>
+    <input type="text" value={selectedEmployee.id_employee} readOnly />
+  </div>
+  <div className="form-group">
+    <label>Tên:</label>
+    <input type="text" value={selectedEmployee.employee_name} />
+  </div>
+  <div className="form-group">
+    <label>Ngày sinh:</label>
+    <input
+      type="text"
+      value={dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}
+    />
+  </div>
+  <div className="form-group">
+    <label>Giới tính:</label>
+    <input type="text" value={selectedEmployee.gender} />
+  </div>
+  <div className="form-group">
+    <label>SDT:</label>
+    <input type="text" value={selectedEmployee.phone} />
+  </div>
+  <div className="form-group">
+    <label>Công việc:</label>
+    <select defaultValue={selectedEmployee.office_name}>
+      <option value="Bếp">Bếp</option>
+      <option value="Phục vụ">Phục vụ</option>
+      <option value="Quản lý">Quản lý</option>
+      {/* Bạn có thể fetch danh sách vai trò động nếu cần */}
+    </select>
+  </div>
+</div>
                 <div className="tab-footer">
                 <button
                   className="update-confirm-button"

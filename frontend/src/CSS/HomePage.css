@@ -522,7 +522,7 @@
 .tk-btn {
   position: absolute;
   bottom: 20px; /* cách đáy 20px */
-  left: 500px;   /* cách trái 20px */
+  left: 450px;   /* cách trái 20px */
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -574,6 +574,6 @@
 .tab-header span {
   flex: 1;
   text-align: center;       /* Căn giữa nội dung trong span */
-  font-size: 20px;          /* Hoặc tùy chỉnh lớn hơn nếu muốn */
+  font-size: 25px;          /* Hoặc tùy chỉnh lớn hơn nếu muốn */
   font-weight: bold;
 }
