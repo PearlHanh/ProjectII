@@ -60,6 +60,22 @@ app.get("/api/orderlist", async (req, res) => {
   }
 });
 
+app.put("/api/orderlist/:id_dish", async (req, res) => {
+  const { id_dish } = req.params;
+  const { dish_cost, dish_stock } = req.body;
+
+  try {
+    const result = await db.query(
+      `UPDATE "order".dish SET dish_cost = $1, dish_stock = $2 WHERE id_dish = $3 RETURNING *`,
+      [dish_cost, dish_stock, id_dish]
+    );
+
+    res.json(result.rows[0]); // trả về bản ghi đã cập nhật
+  } catch (err) {
+    console.error("Lỗi khi cập nhật món ăn:", err);
+    res.status(500).json({ error: "Lỗi server khi cập nhật món ăn" });
+  }
+});
 // ORDER - thêm món vào order
 app.post("/api/ordertable", async (req, res) => {
   let { id_table, id_dish, quantity } = req.body;
