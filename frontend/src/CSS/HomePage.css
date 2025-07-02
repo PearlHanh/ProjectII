@@ -559,3 +559,21 @@
   justify-content: center;
   padding-top: 16px;
 }
+
+.tab-header {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center;     /* Căn giữa theo chiều dọc (nếu cần) */
+  padding: 12px;
+  font-size: 18px;         /* Tăng cỡ chữ cho toàn bộ header */
+  font-weight: 600;        /* Làm đậm hơn một chút */
+  border-bottom: 1px solid #ccc;
+  position: relative;      /* Để nút ✕ căn được về góc phải */
+}
+
+.tab-header span {
+  flex: 1;
+  text-align: center;       /* Căn giữa nội dung trong span */
+  font-size: 20px;          /* Hoặc tùy chỉnh lớn hơn nếu muốn */
+  font-weight: bold;
+}
