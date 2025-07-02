@@ -465,7 +465,7 @@ const handlePay = async () => {
       body: JSON.stringify({
         orderCode: Date.now(),
         amount: total,
-        description: `Thanh toán bàn ${selectedTable}`,
+        description: `Thanh toan ban ${selectedTable}`,
       }),
     });
     const data = await res.json();
