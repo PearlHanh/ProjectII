@@ -159,11 +159,12 @@ useEffect(() => {
 
 
 // Cập nhật thong tin nhân viên
-const [showUpdateTab, setShowUpdateTab] = useState(false);
+const [tabType, setTabType] = useState(null); // 'update' | null
 const [selectedEmployee, setSelectedEmployee] = useState(null);
-const handleUpdateClick = (emp) => {
-  setSelectedEmployee(emp);
-  setShowUpdateTab(true);
+
+const handleUpdateClick = (employee) => {
+  setSelectedEmployee(employee);
+  setTabType("update");
 };
     return(
     <div className="orderScreen">
