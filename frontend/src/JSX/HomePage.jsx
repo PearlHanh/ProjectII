@@ -379,7 +379,7 @@ const handleSaveEdit = async (id_dish) => {
 };
 
 const handleAddDish = async () => {
-  const { dish_name, type_of_dish, dish_cost, dish_stock, dish_image } = newDish;
+  const { id_dish, dish_name, type_of_dish, dish_cost, dish_stock, dish_image } = newDish;
 
   // Kiểm tra rỗng
   if (!dish_name || !type_of_dish || !dish_cost || !dish_stock || !dish_image) {
