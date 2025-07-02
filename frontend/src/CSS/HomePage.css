@@ -369,8 +369,10 @@
 }
 
 .table-wrapper {
+  max-height: 400px; /* Đặt chiều cao cụ thể thay vì % */
   overflow-y: auto;
-  max-height: 80%; /* Giới hạn chiều cao của bảng */
+  overflow-x: auto; /* optional: cuộn ngang nếu bị tràn */
+  border: 1px solid #ddd;
 }
 
 .employee-table {
