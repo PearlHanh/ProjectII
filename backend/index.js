@@ -220,6 +220,42 @@ app.get("/api/statistics/dish", async (req, res) => {
     return res.status(500).json({ error: "Lỗi server" });
   }
 });
+
+// Cap nhat thong tin nhan vien
+app.put("/api/employee/:id", async (req, res) => {
+  const { id } = req.params;
+  const { employee_name, birthday, gender, phone, office_name } = req.body;
+
+  try {
+    // Lấy id_office tương ứng với office_name
+    const officeRes = await db.query(
+      `SELECT id_office FROM login.office WHERE office_name = $1`,
+      [office_name]
+    );
+    if (officeRes.rows.length === 0) {
+      return res.status(400).json({ error: "Không tìm thấy office_name." });
+    }
+
+    const id_office = officeRes.rows[0].id_office;
+
+    // Cập nhật thông tin nhân viên
+    await db.query(
+      `UPDATE login.employee
+       SET employee_name = $1,
+           birthday = $2,
+           gender = $3,
+           phone = $4,
+           id_office = $5
+       WHERE id_employee = $6`,
+      [employee_name, birthday, gender, phone, id_office, id]
+    );
+
+    return res.status(200).json({ message: "Cập nhật nhân viên thành công!" });
+  } catch (err) {
+    console.error("Lỗi cập nhật nhân viên:", err);
+    return res.status(500).json({ error: "Lỗi server" });
+  }
+});
 // Lấy danh sách nhân viên
 app.get("/api/employee", async (req, res) => {
   try {

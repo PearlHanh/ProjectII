@@ -164,6 +164,78 @@ const handleUpdateClick = (employee) => {
   setSelectedEmployee(employee);
   setTabType("update");
 };
+
+
+// Xử lý sự kiện khi nhấn nút "Cập nhật" trong tab
+const [formData, setFormData] = useState({
+  id_employee: "",
+  employee_name: "",
+  birthday: "",
+  gender: "",
+  phone: "",
+  office_name: ""
+});
+useEffect(() => {
+  if (selectedEmployee) {
+    setFormData({
+      id_employee: selectedEmployee.id_employee,
+      employee_name: selectedEmployee.employee_name,
+      birthday: dayjs(selectedEmployee.birthday).format("YYYY-MM-DD"),
+      gender: selectedEmployee.gender,
+      phone: selectedEmployee.phone,
+      office_name: selectedEmployee.office_name
+    });
+  }
+}, [selectedEmployee]);
+// Xử lý cập nhật nhân viên
+const handleUpdateEmployee = async () => {
+  try {
+    const res = await fetch("https://projectii-production.up.railway.app/api/employee/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!res.ok) throw new Error("Cập nhật thất bại");
+    alert("Cập nhật thành công");
+
+    // Cập nhật lại danh sách nhân viên
+    const updatedList = await fetch("https://projectii-production.up.railway.app/api/employee").then(r => r.json());
+    setEmployees(updatedList);
+    setTabType(null); // Đóng tab cập nhật
+  } catch (err) {
+    console.error(err);
+    alert("Đã xảy ra lỗi khi cập nhật nhân viên");
+  }
+};
+
+
+const handleConfirmUpdate = () => {
+  fetch(`https://projectii-production.up.railway.app/api/employee/${selectedEmployee.id_employee}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      employee_name,
+      birthday,
+      gender,
+      phone,
+      office_name
+    }),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Cập nhật thất bại");
+      alert("Cập nhật thành công!");
+      setTabType(null);
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Lỗi khi cập nhật nhân viên");
+    });
+};
     return(
     <div className="orderScreen">
         <div className="toolbar">
@@ -376,41 +448,72 @@ const handleUpdateClick = (employee) => {
               </div>
               <div className="tab-body">
   <div className="form-group">
-  <div className="form-label">ID:</div>
-  <div className="form-value">{selectedEmployee.id_employee}</div>
+    <div className="form-label">ID:</div>
+    <div className="form-value">{formData.id_employee}</div>
   </div>
+
   <div className="form-group">
     <label>Tên:</label>
-    <input type="text" value={selectedEmployee.employee_name} />
+    <input
+      type="text"
+      value={formData.employee_name}
+      onChange={(e) =>
+        setFormData({ ...formData, employee_name: e.target.value })
+      }
+    />
   </div>
+
   <div className="form-group">
     <label>Ngày sinh:</label>
     <input
-      type="text"
-      value={dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}
+      type="date"
+      value={formData.birthday}
+      onChange={(e) =>
+        setFormData({ ...formData, birthday: e.target.value })
+      }
     />
   </div>
+
   <div className="form-group">
     <label>Giới tính:</label>
-    <input type="text" value={selectedEmployee.gender} />
+    <input
+      type="text"
+      value={formData.gender}
+      onChange={(e) =>
+        setFormData({ ...formData, gender: e.target.value })
+      }
+    />
   </div>
+
   <div className="form-group">
     <label>SDT:</label>
-    <input type="text" value={selectedEmployee.phone} />
+    <input
+      type="text"
+      value={formData.phone}
+      onChange={(e) =>
+        setFormData({ ...formData, phone: e.target.value })
+      }
+    />
   </div>
+
   <div className="form-group">
     <label>Công việc:</label>
-    <select defaultValue={selectedEmployee.office_name}>
+    <select
+      value={formData.office_name}
+      onChange={(e) =>
+        setFormData({ ...formData, office_name: e.target.value })
+      }
+    >
       <option value="Bếp">Bếp</option>
       <option value="Phục vụ">Phục vụ</option>
       <option value="Quản lý">Quản lý</option>
-      {/* Bạn có thể fetch danh sách vai trò động nếu cần */}
     </select>
   </div>
 </div>
                 <div className="tab-footer">
                 <button
                   className="update-confirm-button"
+                  onClick={handleUpdateEmployee}
                   >xác nhận</button>
                   </div>
               </div>
