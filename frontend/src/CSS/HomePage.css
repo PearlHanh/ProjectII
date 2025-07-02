@@ -728,3 +728,34 @@
 .save-button:hover {
   background-color: #16a34a;
 }
+
+.add-form-wrapper {
+  margin-top: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-row input {
+  flex: 1 1 160px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.add-button {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}

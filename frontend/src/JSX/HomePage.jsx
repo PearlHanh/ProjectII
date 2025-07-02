@@ -861,6 +861,42 @@ const handleDeleteDish = async (id_dish) => {
           </tbody>
         </table>
       </div>
+      <div className="goods-wrapper add-form-wrapper">
+    <h3>➕ Thêm món ăn mới</h3>
+    <div className="form-row">
+      <input
+        type="text"
+        placeholder="Tên món"
+        value={newDish.dish_name}
+        onChange={(e) => setNewDish({ ...newDish, dish_name: e.target.value })}
+      />
+      <input
+        type="text"
+        placeholder="Loại"
+        value={newDish.type_of_dish}
+        onChange={(e) => setNewDish({ ...newDish, type_of_dish: e.target.value })}
+      />
+      <input
+        type="number"
+        placeholder="Giá"
+        value={newDish.dish_cost}
+        onChange={(e) => setNewDish({ ...newDish, dish_cost: e.target.value })}
+      />
+      <input
+        type="number"
+        placeholder="Số lượng"
+        value={newDish.dish_stock}
+        onChange={(e) => setNewDish({ ...newDish, dish_stock: e.target.value })}
+      />
+      <input
+        type="text"
+        placeholder="Ảnh URL"
+        value={newDish.dish_image}
+        onChange={(e) => setNewDish({ ...newDish, dish_image: e.target.value })}
+      />
+      <button className="add-button" onClick={handleAddDish}>Thêm</button>
+    </div>
+  </div>
     </div>
   </div>
 
