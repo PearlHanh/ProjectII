@@ -710,7 +710,7 @@
 }
 
 .goods-wrapper{
-  flex: 1;
+  flex: 0 0 50%;
   height: 80%;
   align-self: flex-start;
   overflow-y: auto;  /* ✅ Thanh cuộn nếu nội dung quá dài */
