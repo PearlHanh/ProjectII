@@ -458,7 +458,7 @@ const [newDish, setNewDish] = useState({
 const handlePay = async () => {
   const total = orderedDishes.reduce((sum, d) => sum + d.total_cost, 0);
   try {
-    const res = await fetch("https://hoanganhbui2110.netlify.app/api/create-payment", {
+    const res = await fetch("https://projectii-production.up.railway.app/api/create-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
