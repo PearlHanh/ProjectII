@@ -231,6 +231,15 @@ app.get("/api/employee", async (req, res) => {
   }
 });
 
+// Ping dinh ky de tranh crash
+setInterval(async () => {
+  try {
+    await db.query("SELECT 1");
+    console.log("✅ Keep-alive ping to PostgreSQL succeeded");
+  } catch (error) {
+    console.error("❌ Keep-alive ping to PostgreSQL failed:", error);
+  }
+}, 5 * 60 * 1000);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`✅ Backend đang chạy tại http://localhost:${PORT}`);

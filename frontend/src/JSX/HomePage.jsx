@@ -344,7 +344,7 @@ useEffect(() => {
                   className="update-button"
                   onClick={() => handleUpdateClick(emp)}
                 >
-                  Cập nhật
+                  🔄
                 </button>
                 </td>
             </tr>
