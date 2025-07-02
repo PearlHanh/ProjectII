@@ -685,7 +685,7 @@
 .goods-wrapper,
 .salary-wrapper {
   width: 50%;              /* ✅ CHIA ĐỀU 50% */
-  height: 100%;            /* hoặc 80% nếu muốn */
+  height: 80%;            /* hoặc 80% nếu muốn */
   overflow-y: auto;
   border: 1px solid #ddd;
   border-radius: 12px;
