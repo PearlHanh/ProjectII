@@ -3,8 +3,7 @@
   import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
   import dayjs from 'dayjs';
   import { RefreshCcw, Trash } from "lucide-react";
-  import { usePayOS, PayOSConfig } from "payos-checkout";
-  export default function HomePage(){
+    export default function HomePage(){
     // calendar
     const [markedDates, setMarkedDates] = useState([]);
     const [value, setValue] = useState(new Date());
