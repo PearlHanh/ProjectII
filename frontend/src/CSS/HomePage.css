@@ -729,10 +729,6 @@
   background-color: #16a34a;
 }
 
-.add-form-wrapper {
-  margin-top: 16px;
-}
-
 .form-row {
   display: flex;
   flex-wrap: wrap;
