@@ -290,7 +290,7 @@ app.post("/api/dish/create", async (req, res) => {
       INSERT INTO "order".dish (id_dish, dish_name, dish_cost, dish_image, type_of_dish, dish_stock)
       VALUES ($1, $2, $3, $4, $5, $6)
     `;
-    await db.query(query, [id_dish, dish_name,dish_cost, type_of_dish,dish_image, dish_stock]);
+    await db.query(query, [id_dish, dish_name,dish_cost,dish_image, type_of_dish, dish_stock]);
 
     return res.status(201).json({ message: "✅ Món ăn đã được thêm" });
   } catch (err) {
