@@ -376,8 +376,8 @@ const handleUpdateClick = (employee) => {
               </div>
               <div className="tab-body">
   <div className="form-group">
-    <label>ID:</label>
-    <input type="text" value={selectedEmployee.id_employee} readOnly />
+  <div className="form-label">ID:</div>
+  <div className="form-value">{selectedEmployee.id_employee}</div>
   </div>
   <div className="form-group">
     <label>Tên:</label>
