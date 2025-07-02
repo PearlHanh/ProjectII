@@ -267,6 +267,34 @@ app.get("/api/office", async (req, res) => {
   }
 });
 
+// Diem danh nhan vien
+app.post("/api/timekeeping", async (req, res) => {
+  const { data } = req.body;
+
+  if (!Array.isArray(data)) {
+    return res.status(400).json({ error: "Dữ liệu không hợp lệ" });
+  }
+
+  try {
+    for (const item of data) {
+      const { day, id_employee, is_presence } = item;
+      await db.query(
+        `
+        INSERT INTO login.timekeeping(day, id_employee, is_presence)
+        VALUES ($1, $2, $3)
+        ON CONFLICT (day, id_employee)
+        DO UPDATE SET is_presence = EXCLUDED.is_presence
+      `,
+        [day, id_employee, is_presence]
+      );
+    }
+
+    return res.status(200).json({ message: "Chấm công thành công" });
+  } catch (err) {
+    console.error("Lỗi chấm công:", err);
+    return res.status(500).json({ error: "Lỗi server" });
+  }
+});
 // Lấy danh sách nhân viên
 app.get("/api/employee", async (req, res) => {
   try {

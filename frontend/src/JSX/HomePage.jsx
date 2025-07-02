@@ -240,6 +240,46 @@ useEffect(() => {
     .then(data => setOffices(data))
     .catch(err => console.error("Lỗi khi load office:", err));
 }, []);
+
+// Checkbox cho nhân viên
+const [checkedEmployees, setCheckedEmployees] = useState({});
+const handleConfirmAttendance = () => {
+  const today = dayjs().format("YYYY-MM-DD");
+  const entries = Object.entries(checkedEmployees);
+
+  const dataToSend = entries.map(([id_employee, isChecked]) => ({
+    id_employee,
+    day: today,
+    is_presence: isChecked ? 1 : 0,
+  }));
+
+  fetch("https://projectii-production.up.railway.app/api/timekeeping", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data: dataToSend }),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Lỗi khi chấm công");
+      alert("✅ Chấm công thành công");
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("❌ Có lỗi khi chấm công");
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
     return(
     <div className="orderScreen">
         <div className="toolbar">
@@ -417,10 +457,17 @@ useEffect(() => {
                     <td>{emp.phone}</td>
                     <td>{emp.office_name}</td>
                     <td className="checkbox-cell">
-                      <input
-                      type="checkbox"
-                      className="large-checkbox"
-                      />
+                    <input
+  type="checkbox"
+  className="large-checkbox"
+  checked={checkedEmployees[emp.id_employee] || false}
+  onChange={() => {
+    setCheckedEmployees((prev) => ({
+      ...prev,
+      [emp.id_employee]: !prev[emp.id_employee],
+    }));
+  }}
+/>
                       </td>
                     <td>
                       <button
@@ -435,7 +482,8 @@ useEffect(() => {
               </tbody>
             </table>
           </div>
-          <button className="tk-btn">xác nhận</button>
+          <button className="tk-btn"
+          onClick={handleConfirmAttendance}>xác nhận</button>
           <button className="add-employee-button">Thêm nhân viên
 </button>
           {/* Tab cập nhật */}
