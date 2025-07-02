@@ -171,7 +171,13 @@ const handleUpdateClick = (employee) => {
 
 // Diem danh
 const [selectedDate, setSelectedDate] = useState(new Date());
-
+const handleDateClick = (date) => {
+  if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
+    setSelectedDate(null); // Bỏ chọn nếu nhấn lại đúng ngày đã chọn
+  } else {
+    setSelectedDate(date); // Chọn ngày mới
+  }
+};
     return(
     <div className="orderScreen">
         <div className="toolbar">
@@ -397,10 +403,15 @@ const [selectedDate, setSelectedDate] = useState(new Date());
                   <strong>ID công việc:</strong> {selectedEmployee.office_name}
 
                   <Calendar
-                  onChange={setSelectedDate}
-                  value={selectedDate}
-                  locale="vi-VN"
-    />
+  onChange={handleDateClick}
+  value={selectedDate}
+  tileClassName={({ date }) =>
+    selectedDate &&
+    date.toDateString() === selectedDate.toDateString()
+      ? "selected-date"
+      : null
+  }
+/>
                 </p>
               </div>
             </div>

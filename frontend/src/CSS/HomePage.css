@@ -499,3 +499,46 @@
   font-family: "Be Vietnam Pro", sans-serif;
   letter-spacing: 0.5px;        /* Tăng khoảng cách chữ */    /* Viết hoa toàn bộ */
 }
+
+/* Tổng thể calendar */
+.react-calendar {
+  border: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+  width: 100%;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Nút ngày mặc định */
+.react-calendar__tile {
+  padding: 10px 0;
+  border-radius: 50%; /* Làm nút ngày hình tròn */
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  margin: auto;
+}
+
+/* Khi được chọn */
+.react-calendar__tile--active {
+  background-color: #007bff !important;
+  color: white !important;
+  border-radius: 50% !important;
+}
+
+/* Ngày hiện tại (today) */
+.react-calendar__tile--now {
+  background-color: #f0f0f0;
+  color: #000;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+/* Hover */
+.react-calendar__tile:enabled:hover {
+  background-color: #d6e4ff;
+  border-radius: 50%;
+  cursor: pointer;
+}
