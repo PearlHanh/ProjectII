@@ -417,19 +417,6 @@
   height: 100%;
   width: 100%;
 }
-.tab-content-box {
-  position: fixed;
-  top: 13%;
-  left: 62.5%;
-  width: 35%;
-  height: 85%;
-  overflow-y: auto;
-  background-color: #fefefe;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
 
 .employee-layout-row {
   display: flex;
