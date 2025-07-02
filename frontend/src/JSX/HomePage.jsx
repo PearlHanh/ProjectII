@@ -268,10 +268,28 @@ const handleConfirmAttendance = () => {
     });
 };
 
+const [disabledEmployees, setDisabledEmployees] = useState({});
 
+useEffect(() => {
+  const saved = localStorage.getItem("disabledEmployees");
+  if (saved) {
+    setDisabledEmployees(JSON.parse(saved));
+  }
+}, []);
 
+useEffect(() => {
+  localStorage.setItem("disabledEmployees", JSON.stringify(disabledEmployees));
+}, [disabledEmployees]);
 
+useEffect(() => {
+  const today = dayjs().format("YYYY-MM-DD");
+  const lastDate = localStorage.getItem("attendanceDate");
 
+  if (lastDate !== today) {
+    localStorage.removeItem("disabledEmployees");
+    localStorage.setItem("attendanceDate", today);
+  }
+}, []);
 
 
 
@@ -467,6 +485,7 @@ const handleConfirmAttendance = () => {
       [emp.id_employee]: !prev[emp.id_employee],
     }));
   }}
+  disabled={disabledEmployees[emp.id_employee]}
 />
                       </td>
                     <td>
