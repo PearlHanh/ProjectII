@@ -492,11 +492,13 @@
   color: #000;
 }
 
-.tab-body p {
-  margin: 4px 0;
-  flex: 1;
-  overflow-y: auto;
+.tab-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 17px;
 }
+
 .header-employee {
   font-size: 2rem;              /* Tăng kích cỡ */
   font-weight: 700;             /* In đậm */
@@ -576,4 +578,25 @@
   text-align: center;       /* Căn giữa nội dung trong span */
   font-size: 25px;          /* Hoặc tùy chỉnh lớn hơn nếu muốn */
   font-weight: bold;
+}
+
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.form-group label {
+  width: 120px;        /* 👈 Cố định chiều ngang */
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;              /* 👈 Phần còn lại là ô nhập */
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
