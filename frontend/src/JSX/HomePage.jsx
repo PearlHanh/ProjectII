@@ -534,42 +534,7 @@ const handlePay = async () => {
     )}
    <button
   className="pay"
-  onClick={async () => {
-    const total = orderedDishes.reduce((sum, dish) => sum + dish.total_cost, 0);
-    const formattedTotal = total.toLocaleString("vi-VN");
-
-    if (orderedDishes.length === 0) {
-      alert("Chưa có món nào được đặt.");
-      return;
-    }
-
-    if (window.confirm(`Tổng tiền cần thanh toán: ${formattedTotal}đ\nBạn có chắc muốn thanh toán không?`)) {
-      try {
-        // 1. Gọi API tạo link thanh toán PayOS test
-        const response = await fetch("https://projectii-production.up.railway.app/api/create-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            orderCode: Date.now(), // unique cho mỗi đơn
-            amount: total, // số tiền cần thanh toán
-            description: `Thanh toán bàn ${selectedTable}`
-          })
-        });
-
-        const data = await response.json();
-        console.log("Link thanh toán:", data);
-        if (data.checkoutUrl) {
-          // 2. Điều hướng sang trang thanh toán PayOS
-          window.location.href = data.checkoutUrl;
-        } else {
-          throw new Error("Không tạo được link thanh toán");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Có lỗi khi tạo thanh toán.");
-      }
-    }
-  }}
+  onClick={handlePay}
 >
   Thanh toán
 </button>
