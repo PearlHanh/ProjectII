@@ -321,6 +321,7 @@ const handleUpdateClick = (employee) => {
         <div className="employee-layout">
           {/* Bảng nhân viên */}
           <div className="table-wrapper">
+            <h1 className="header">Danh sách nhân viên</h1>
             <table className="employee-table">
               <thead>
                 <tr>
