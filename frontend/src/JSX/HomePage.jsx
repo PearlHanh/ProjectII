@@ -166,6 +166,12 @@ const handleUpdateClick = (employee) => {
   setSelectedEmployee(employee);
   setTabType("update");
 };
+
+
+
+// Diem danh
+const [selectedDate, setSelectedDate] = useState(new Date());
+
     return(
     <div className="orderScreen">
         <div className="toolbar">
@@ -388,7 +394,13 @@ const handleUpdateClick = (employee) => {
                   <strong>SDT:</strong> {selectedEmployee.phone}
                 </p>
                 <p>
-                  <strong>ID công việc:</strong> {selectedEmployee.id_office}
+                  <strong>ID công việc:</strong> {selectedEmployee.office_name}
+
+                  <Calendar
+                  onChange={setSelectedDate}
+                  value={selectedDate}
+                  locale="vi-VN"
+    />
                 </p>
               </div>
             </div>
