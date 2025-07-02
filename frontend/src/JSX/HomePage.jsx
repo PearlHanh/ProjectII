@@ -685,9 +685,7 @@ useEffect(() => {
                   {/* Nửa bên trái */}
                   <div className="manage-layout">
                     {/* Nội dung lịch sử trái */}
-
   <div className="goods-wrapper">
-    <div className="goods-table">
     <table className="goods-table">
       <thead>
         <tr>
@@ -736,9 +734,26 @@ useEffect(() => {
     </table>
   </div>
 </div>
-                    </div>
+</div>
                   {/* Nửa bên phải */}
-                  <div className="manage-salary">
+                  <div className="manage-layout-right">
+                    <div className="salary-wrapper">
+                      <table className="salary-table">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Tên nhân viên</th>
+                            <th>Ngày</th>
+                            <th>Giờ vào</th>
+                            <th>Giờ ra</th>
+                            <th>Số giờ làm</th>
+                            <th>Lương</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          </tbody>
+                          </table>
                     {/* Nội dung lịch sử phải */}
                     </div>
                     </div>
