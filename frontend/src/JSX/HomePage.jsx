@@ -662,11 +662,11 @@
         </div>
       </div>
   )}
-              {activedId === 4 && <div className="historytable">
+              {activedId === 4 && <div className="managetable">
               <div className="table4">
                 <div className="manage-layout">
                   {/* Nửa bên trái */}
-                  <div className="mamnage-goods">
+                  <div className="manage-goods">
                     {/* Nội dung lịch sử trái */}
                     </div>
                   {/* Nửa bên phải */}
