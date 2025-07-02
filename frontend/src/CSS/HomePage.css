@@ -370,7 +370,7 @@
 
 .table-wrapper {
   overflow-y: auto;
-  width: 100%;
+  max-height: 80%; /* Giới hạn chiều cao của bảng */
 }
 
 .employee-table {
