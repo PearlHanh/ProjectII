@@ -685,7 +685,6 @@ useEffect(() => {
                   {/* Nửa bên trái */}
                   <div className="manage-goods">
                     {/* Nội dung lịch sử trái */}
-                    <div className="goods-layout-row">
   <div className="goods-table-wrapper">
     <table className="goods-table">
       <thead>
@@ -739,7 +738,6 @@ useEffect(() => {
                   {/* Nửa bên phải */}
                   <div className="manage-salary">
                     {/* Nội dung lịch sử phải */}
-                    </div>
                     </div>
                     </div>
               }

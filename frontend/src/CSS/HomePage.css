@@ -664,12 +664,7 @@
 
 
 
-.goods-layout-row {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  margin-top: 20px;
-}
+
 
 .goods-table-wrapper {
   flex: 0 0 100%;
