@@ -687,8 +687,7 @@ useEffect(() => {
                   <div className="manage-goods">
                     {/* Nội dung lịch sử trái */}
                     <div className="goods-layout-row">
-  <div className="goods-wrapper">
-    <h2 className="header">Danh sách món ăn</h2>
+  <div className="goods-table-wrapper">
     <table className="goods-table">
       <thead>
         <tr>
@@ -698,6 +697,8 @@ useEffect(() => {
           <th>Giá</th>
           <th>Số lượng còn</th>
           <th>Ảnh</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
