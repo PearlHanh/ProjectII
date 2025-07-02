@@ -223,7 +223,19 @@ app.get("/api/statistics/dish", async (req, res) => {
 // Lấy danh sách nhân viên
 app.get("/api/employee", async (req, res) => {
   try {
-    const result = await db.query(`SELECT * FROM login.employee`);
+    const result = await db.query(`SELECT 
+  e.id_employee, 
+  e.employee_name, 
+  e.birthday, 
+  e.gender, 
+  e.phone, 
+  o.office_name
+FROM 
+  login.employee e
+JOIN 
+  login.office o 
+ON 
+  e.id_office = o.id_office;`);
     return res.json(result.rows);
   } catch (err) {
     console.error("Lỗi khi lấy danh sách nhân viên:", err);

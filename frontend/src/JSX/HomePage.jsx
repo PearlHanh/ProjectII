@@ -329,7 +329,7 @@ const handleUpdateClick = (employee) => {
                   <th>Ngày sinh</th>
                   <th>Giới tính</th>
                   <th>Số điện thoại</th>
-                  <th>ID công việc</th>
+                  <th>Vai trò</th>
                   <th></th>
                 </tr>
               </thead>
@@ -341,7 +341,7 @@ const handleUpdateClick = (employee) => {
                     <td>{dayjs(emp.birthday).format("DD-MM-YYYY")}</td>
                     <td>{emp.gender}</td>
                     <td>{emp.phone}</td>
-                    <td>{emp.id_office}</td>
+                    <td>{emp.office_name}</td>
                     <td>
                       <button
                         className="update-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
