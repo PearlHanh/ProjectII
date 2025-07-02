@@ -368,12 +368,7 @@
   background-color: #2980b9;
 }
 
-.table-wrapper {
-  max-height: 400px; /* Đặt chiều cao cụ thể thay vì % */
-  overflow-y: auto;
-  overflow-x: auto; /* optional: cuộn ngang nếu bị tràn */
-  border: 1px solid #ddd;
-}
+
 
 .employee-table {
   border-collapse: collapse;
@@ -389,14 +384,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.tab-content-box {
-  margin-top: 20px;
-  padding: 16px;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
+
 
 .tab-header {
   display: flex;
@@ -419,4 +407,28 @@
 
 .tab-body p {
   margin: 4px 0;
+}
+
+.employee-layout {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.table-wrapper {
+  flex: 0 0 65%;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+}
+
+.tab-content-box {
+  flex: 1;
+  max-width: 35%;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
