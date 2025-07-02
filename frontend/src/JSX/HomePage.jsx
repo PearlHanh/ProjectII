@@ -2,7 +2,7 @@
   import { useState, useEffect } from "react";
   import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
   import dayjs from 'dayjs';
-  import { RefreshCcw } from "lucide-react";
+  import { RefreshCcw, Trash } from "lucide-react";
   export default function HomePage(){
     // calendar
     const [markedDates, setMarkedDates] = useState([]);
@@ -720,6 +720,15 @@ useEffect(() => {
                 }}
               />
             </td>
+            <td><button
+                          className="update2-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        >
+                          <RefreshCcw className="w-5 h-5" />
+                        </button></td>
+            <td>
+            <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"><Trash className="w-5 h-5" />
+</button>
+</td>
           </tr>
         ))}
       </tbody>
