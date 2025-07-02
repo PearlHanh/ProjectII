@@ -145,6 +145,19 @@ app.post("/api/ordertable", async (req, res) => {
   }
 });
 
+
+// Delete dish
+app.delete("/api/dish/:id_dish", async (req, res) => {
+  const { id_dish } = req.params;
+
+  try {
+    await db.query(`DELETE FROM "order".dish WHERE id_dish = $1`, [id_dish]);
+    res.status(200).json({ message: "Xóa thành công" });
+  } catch (err) {
+    console.error("Lỗi khi xóa dish:", err);
+    res.status(500).json({ error: "Lỗi server khi xóa dish" });
+  }
+});
 // Delete order
 app.delete("/api/ordertable/delete/:id_table", async (req, res) => {
   const { id_table } = req.params;
