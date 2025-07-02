@@ -469,6 +469,7 @@ const handlePay = async () => {
       }),
     });
     const data = await res.json();
+    console.log("Link thanh toán:", data);
     if (data.checkoutUrl) {
       window.location.href = data.checkoutUrl;
     } else {
