@@ -69,8 +69,29 @@ app.post("/api/ordertable", async (req, res) => {
     return res.status(400).json({ error: "Thiếu dữ liệu cần thiết" });
   }
 
+  const client = await db.connect(); // 👈 dùng transaction
   try {
-    await db.query(
+    await client.query("BEGIN");
+
+    // 🔍 Lấy số lượng món còn lại
+    const result = await client.query(
+      `SELECT dish_stock FROM "order".dish WHERE id_dish = $1 FOR UPDATE`,
+      [id_dish]
+    );
+
+    if (result.rowCount === 0) {
+      throw new Error("Không tìm thấy món ăn");
+    }
+
+    const currentStock = result.rows[0].dish_stock;
+
+    if (currentStock < quantity) {
+      await client.query("ROLLBACK");
+      return res.status(400).json({ error: "Không đủ món trong kho" });
+    }
+
+    // ✅ Cập nhật bảng ordertable
+    await client.query(
       `
       INSERT INTO "order".ordertable (id_table, id_dish, dish_quantity)
       VALUES ($1, $2, $3)
@@ -80,7 +101,8 @@ app.post("/api/ordertable", async (req, res) => {
       [id_table, id_dish, quantity]
     );
 
-    await db.query(
+    // ✅ Cập nhật bảng total
+    await client.query(
       `
       INSERT INTO "order".total (id_dish, quantity, time)
       VALUES ($1, $2, NOW())
@@ -90,10 +112,20 @@ app.post("/api/ordertable", async (req, res) => {
       [id_dish, quantity]
     );
 
-    return res.status(200).json({ message: "Đã lưu order thành công" });
-  } catch (err) { 
-    console.error("Lỗi khi insert order:", err);
+    // ✅ Trừ stock
+    await client.query(
+      `UPDATE "order".dish SET dish_stock = dish_stock - $1 WHERE id_dish = $2`,
+      [quantity, id_dish]
+    );
+
+    await client.query("COMMIT");
+    return res.status(200).json({ message: "Đã đặt hàng thành công" });
+  } catch (err) {
+    await client.query("ROLLBACK");
+    console.error("Lỗi khi xử lý order:", err);
     return res.status(500).json({ error: "Lỗi server" });
+  } finally {
+    client.release();
   }
 });
 

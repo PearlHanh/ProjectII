@@ -55,10 +55,22 @@
     //Gui dat mon
     const handleOrderSingle = async (id_dish) => {
       const quantity = quantities[id_dish] || 0;
-      const id_table = `TB${tableID}`; // Gắn cố định hoặc lấy từ props/state
+      const id_table = `TB${tableID}`;
     
       if (quantity === 0) {
         alert("Vui lòng chọn số lượng lớn hơn 0.");
+        return;
+      }
+    
+      // Tìm món ăn được chọn trong danh sách orders
+      const selectedDish = orders.find((dish) => dish.id_dish === id_dish);
+      if (!selectedDish) {
+        alert("Món ăn không tồn tại.");
+        return;
+      }
+    
+      if (selectedDish.dish_stock < quantity) {
+        alert(`Không đủ số lượng món. Còn lại: ${selectedDish.dish_stock}`);
         return;
       }
     
@@ -78,9 +90,20 @@
         });
     
         const result = await res.json();
+    
         if (res.ok) {
-          alert(`Đã đặt món ${id_dish} thành công!`);
-          // Reset số lượng món đã đặt
+          alert(`Đã đặt món ${selectedDish.dish_name} thành công!`);
+    
+          // ✅ Trừ dish_stock trong frontend (client-side) để cập nhật UI
+          setOrders((prevOrders) =>
+            prevOrders.map((dish) =>
+              dish.id_dish === id_dish
+                ? { ...dish, dish_stock: dish.dish_stock - quantity }
+                : dish
+            )
+          );
+    
+          // Reset số lượng
           setQuantities((prev) => ({
             ...prev,
             [id_dish]: 0,
@@ -93,6 +116,7 @@
         alert("Không thể gửi order.");
       }
     };
+    
 
   const type_of_dish = ["Các loại thịt", "Các loại rau ăn kèm", "Đồ uống"];
 
