@@ -432,7 +432,8 @@
 /* Bảng bên trái chiếm 65% */
 .table-wrapper {
   flex: 0 0 60%;
-  height: 100%;
+  height: 80%;
+  align-self: flex-start;
   width: 100%;
   overflow-y: auto;  /* ✅ Thanh cuộn nếu nội dung quá dài */
   border: 1px solid #ddd;
@@ -446,7 +447,8 @@
 /* Tab bên phải chiếm phần còn lại */
 .tab-content-box {
   flex: 1;
-  height: 100%;
+  height: 80%;
+  align-self: flex-start; 
   overflow-y: auto;
   padding: 16px;
   background-color: #f9f9f9;
