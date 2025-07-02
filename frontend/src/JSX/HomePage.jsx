@@ -313,77 +313,93 @@ const handleUpdateClick = (employee) => {
   </div>
 )}
 
-            {activedId === 3 && <div className="timesheettable">
-            <div className="table3">
-            <div>
-      {/* <h2>Lịch điểm danh</h2>
-      
-<Calendar
-  onChange={setValue}
-  value={value}
-  onClickDay={handleClickDay}
-  tileClassName={tileClassName}
-/>
-*/}
-<div>
-  <div className="timekeeping-container">
-      <h1>Danh sách nhân viên</h1>
-      <div className="table-wrapper">
-      <table className="employee-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tên nhân viên</th>
-            <th>Ngày sinh</th>
-            <th>Giới tính</th>
-            <th>Số điện thoại</th>
-            <th>ID công việc</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((emp) => (
-            <tr key={emp.id_employee}>
-              <td>{emp.id_employee}</td>
-              <td>{emp.employee_name}</td>
-              <td>{dayjs(emp.birthday).format("DD-MM-YYYY")}</td>
-              <td>{emp.gender}</td>
-              <td>{emp.phone}</td>
-              <td>{emp.id_office}</td>
-              <td>
-              <button
-              className="update-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              onClick={() => handleUpdateClick(emp)}>
-                <RefreshCcw className="w-5 h-5" />
+{activedId === 3 && (
+  <div className="timesheettable">
+    <div className="table3">
+      <div className="timekeeping-container">
+        <h1>Danh sách nhân viên</h1>
+
+        {/* ✅ Layout chia 2 cột: bảng + tab */}
+        <div className="employee-layout">
+          {/* Bảng nhân viên */}
+          <div className="table-wrapper">
+            <table className="employee-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên nhân viên</th>
+                  <th>Ngày sinh</th>
+                  <th>Giới tính</th>
+                  <th>Số điện thoại</th>
+                  <th>ID công việc</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {employees.map((emp) => (
+                  <tr key={emp.id_employee}>
+                    <td>{emp.id_employee}</td>
+                    <td>{emp.employee_name}</td>
+                    <td>{dayjs(emp.birthday).format("DD-MM-YYYY")}</td>
+                    <td>{emp.gender}</td>
+                    <td>{emp.phone}</td>
+                    <td>{emp.id_office}</td>
+                    <td>
+                      <button
+                        className="update-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        onClick={() => handleUpdateClick(emp)}
+                      >
+                        <RefreshCcw className="w-5 h-5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Tab cập nhật */}
+          {tabType === "update" && selectedEmployee && (
+            <div className="tab-content-box">
+              <div className="tab-header">
+                <span>
+                  Cập nhật nhân viên: {selectedEmployee.employee_name}
+                </span>
+                <button
+                  onClick={() => setTabType(null)}
+                  className="tab-close"
+                >
+                  ✕
                 </button>
-                </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    {tabType === "update" && selectedEmployee && (
-    <div className="tab-content-box">
-      <div className="tab-header">
-        <span>Cập nhật nhân viên: {selectedEmployee.employee_name}</span>
-        <button onClick={() => setTabType(null)} className="tab-close">✕</button>
-      </div>
-      <div className="tab-body">
-        <p><strong>ID:</strong> {selectedEmployee.id_employee}</p>
-        <p><strong>Tên:</strong> {selectedEmployee.employee_name}</p>
-        <p><strong>Ngày sinh:</strong> {dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}</p>
-        <p><strong>Giới tính:</strong> {selectedEmployee.gender}</p>
-        <p><strong>SDT:</strong> {selectedEmployee.phone}</p>
-        <p><strong>ID công việc:</strong> {selectedEmployee.id_office}</p>
-      </div>
-    </div>
-  )}
-    </div>
+              </div>
+              <div className="tab-body">
+                <p>
+                  <strong>ID:</strong> {selectedEmployee.id_employee}
+                </p>
+                <p>
+                  <strong>Tên:</strong> {selectedEmployee.employee_name}
+                </p>
+                <p>
+                  <strong>Ngày sinh:</strong>{" "}
+                  {dayjs(selectedEmployee.birthday).format("DD-MM-YYYY")}
+                </p>
+                <p>
+                  <strong>Giới tính:</strong> {selectedEmployee.gender}
+                </p>
+                <p>
+                  <strong>SDT:</strong> {selectedEmployee.phone}
+                </p>
+                <p>
+                  <strong>ID công việc:</strong> {selectedEmployee.id_office}
+                </p>
+              </div>
             </div>
+          )}
         </div>
-        </div>
-        </div>
-            }
+      </div>
+    </div>
+  </div>
+)}
             {activedId === 4 && <div className="historytable">
             <div className="table4">
             </div>
