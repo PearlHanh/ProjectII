@@ -683,9 +683,11 @@ useEffect(() => {
               {activedId === 4 && <div className="managetable">
               <div className="table4">
                   {/* Nửa bên trái */}
-                  <div className="manage-goods">
+                  <div className="manage-layout">
                     {/* Nội dung lịch sử trái */}
-  <div className="goods-table-wrapper">
+
+  <div className="goods-wrapper">
+    <div className="goods-table">
     <table className="goods-table">
       <thead>
         <tr>
@@ -737,12 +739,12 @@ useEffect(() => {
                     </div>
                   {/* Nửa bên phải */}
                   <div className="manage-salary">
-                    <h1> badbajdbaksbdasbdsadsajdb</h1>
                     {/* Nội dung lịch sử phải */}
+                    </div>
                     </div>
                     </div>
               }
               </div>
-  </div>
+              </div>
       )   
   }
