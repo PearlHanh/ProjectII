@@ -316,10 +316,8 @@ const handleUpdateClick = (employee) => {
 {activedId === 3 && (
   <div className="timesheettable">
     <div className="table3">
-      <div className="timekeeping-container">
         <h1>Danh sách nhân viên</h1>
-
-        {/* ✅ Layout chia 2 cột: bảng + tab */}
+                {/* ✅ Layout chia 2 cột: bảng + tab */}
         <div className="employee-layout">
           {/* Bảng nhân viên */}
           <div className="table-wrapper">
@@ -398,7 +396,6 @@ const handleUpdateClick = (employee) => {
         </div>
       </div>
     </div>
-  </div>
 )}
             {activedId === 4 && <div className="historytable">
             <div className="table4">
