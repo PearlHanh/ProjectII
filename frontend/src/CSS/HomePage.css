@@ -661,7 +661,7 @@
 .manage-goods,
 .manage-salary {
   flex: 1;               /* hoặc width: 50% nếu không dùng flex */
-  border-radius: 12px;   /* bo góc */
+  border-radius: 20px;   /* bo góc */
   background-color: white; /* tuỳ ý */
   padding: 16px;         /* tuỳ chọn để nội dung đẹp hơn */
   box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* tuỳ chọn */
