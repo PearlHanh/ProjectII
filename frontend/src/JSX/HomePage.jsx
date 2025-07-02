@@ -371,7 +371,7 @@ const handleSaveEdit = async (id_dish) => {
     const updated = await fetch("https://projectii-production.up.railway.app/api/orderlist").then(r => r.json());
     setDishList(updated);
 
-    setEditingRowId(null);
+    setEditingRowId(null);  
   } catch (err) {
     console.error(err);
     alert("❌ Lỗi khi cập nhật");
@@ -379,7 +379,7 @@ const handleSaveEdit = async (id_dish) => {
 };
 
 const handleAddDish = async () => {
-  const { id_dish, dish_name, type_of_dish, dish_cost, dish_stock, dish_image } = newDish;
+  const { id_dish, dish_name, dish_cost, dish_image, type_of_dish, dish_stock } = newDish;
 
   // Kiểm tra rỗng
   if (!dish_name || !type_of_dish || !dish_cost || !dish_stock || !dish_image) {
@@ -394,10 +394,11 @@ const handleAddDish = async () => {
       body: JSON.stringify({
         id_dish,
         dish_name,
-        type_of_dish,
         dish_cost: parseInt(dish_cost),
-        dish_stock: parseInt(dish_stock),
-        dish_image
+
+        type_of_dish,
+        dish_image,
+        dish_stock: parseInt(dish_stock)
       })
     });
 

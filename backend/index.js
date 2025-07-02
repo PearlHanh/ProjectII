@@ -283,7 +283,7 @@ app.get("/api/statistics/dish", async (req, res) => {
 });
 
 app.post("/api/dish/create", async (req, res) => {
-  const { id_dish, dish_name, type_of_dish, dish_cost, dish_stock, dish_image } = req.body;
+  const { id_dish, dish_name, dish_cost, dish_image, type_of_dish, dish_stock } = req.body;
 
   try {
     const query = `
