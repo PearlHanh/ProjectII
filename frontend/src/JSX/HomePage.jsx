@@ -319,6 +319,7 @@ useEffect(() => {
 <div>
   <div className="timekeeping-container">
       <h1>Danh sách nhân viên</h1>
+      <div className="table-wrapper">
       <table className="employee-table">
         <thead>
           <tr>
@@ -354,6 +355,7 @@ useEffect(() => {
     </div>
     </div>
             </div>
+        </div>
         </div>
         </div>
             }

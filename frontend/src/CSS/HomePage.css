@@ -367,3 +367,12 @@
 .update-button:hover {
   background-color: #2980b9;
 }
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.employee-table {
+  border-collapse: collapse;
+}
