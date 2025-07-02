@@ -314,7 +314,6 @@ const handleUpdateClick = (employee) => {
 {activedId === 3 && (
   <div className="timesheettable">
     <div className="table3">
-    
                 {/* ✅ Layout chia 2 cột: bảng + tab */}
         <div className="employee-layout">
           {/* Bảng nhân viên */}
@@ -360,7 +359,7 @@ const handleUpdateClick = (employee) => {
               </tbody>
             </table>
           </div>
-
+          <button className="tk-btn">xác nhận</button>
           {/* Tab cập nhật */}
           {tabType === "update" && selectedEmployee && (
             <div className="tab-content-box">
