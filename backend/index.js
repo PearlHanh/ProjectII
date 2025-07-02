@@ -295,6 +295,31 @@ app.post("/api/timekeeping", async (req, res) => {
     return res.status(500).json({ error: "Lỗi server" });
   }
 });
+
+// Add New Employee
+// Tạo mới nhân viên
+app.post("/api/employee/create", async (req, res) => {
+  const { id_employee, employee_name, birthday, gender, phone, office_name } = req.body;
+  try {
+    const officeRes = await db.query(`SELECT id_office FROM login.office WHERE office_name = $1`, [office_name]);
+    if (officeRes.rows.length === 0) {
+      return res.status(400).json({ error: "Không tìm thấy công việc" });
+    }
+    const id_office = officeRes.rows[0].id_office;
+
+    await db.query(`
+      INSERT INTO login.employee (id_employee, employee_name, birthday, gender, phone, id_office)
+      
+      VALUES ($1, $2, $3, $4, $5, $6)
+    `, [id_employee, employee_name, birthday, gender, phone, id_office]);
+
+    return res.status(201).json({ message: "Đã thêm nhân viên" });
+  } catch (err) {
+    console.error("Lỗi khi thêm nhân viên:", err);
+    return res.status(500).json({ error: "Lỗi server" });
+  }
+});
+
 // Lấy danh sách nhân viên
 app.get("/api/employee", async (req, res) => {
   try {

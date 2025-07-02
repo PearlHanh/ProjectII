@@ -305,6 +305,34 @@
   }, []);
 
 
+  const handleSubmitEmployee = async () => {
+    const { id_employee, employee_name, birthday, gender, phone, office_name } = formData;
+  
+    const method = tabType === "add" ? "POST" : "PUT";
+    const url =
+      tabType === "add"
+        ? "https://projectii-production.up.railway.app/api/employee/create"
+        : `https://projectii-production.up.railway.app/api/employee/${formData.id_employee}`;
+  
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id_employee, employee_name, birthday, gender, phone, office_name })
+      });
+  
+      if (!res.ok) throw new Error(`${tabType === "add" ? "Thêm" : "Cập nhật"} thất bại`);
+  
+      alert(`${tabType === "add" ? "✅ Đã thêm nhân viên" : "✅ Cập nhật thành công"}`);
+  
+      const updatedList = await fetch("https://projectii-production.up.railway.app/api/employee").then(r => r.json());
+      setEmployees(updatedList);
+      setTabType(null);
+    } catch (err) {
+      console.error(err);
+      alert(`❌ Lỗi khi ${tabType === "add" ? "thêm" : "cập nhật"} nhân viên`);
+    }
+  };
 
 
 
@@ -516,8 +544,22 @@
             </div>
             <button className="tk-btn"
             onClick={handleConfirmAttendance}>xác nhận</button>
-            <button className="add-employee-button">Thêm nhân viên
-  </button>
+            <button
+  className="add-employee-button"
+  onClick={() => {
+    setFormData({
+      id_employee: "",
+      employee_name: "",
+      birthday: "",
+      gender: "",
+      phone: "",
+      office_name: offices.length > 0 ? offices[0].office_name : ""
+    });
+    setTabType("add");
+  }}
+>
+  Thêm nhân viên
+</button>
             {/* Tab cập nhật */}
             {tabType === "update" && selectedEmployee && (
               <div className="tab-content-box">
