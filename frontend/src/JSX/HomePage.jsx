@@ -335,6 +335,24 @@
   };
 
 
+const [dishList, setDishList] = useState([]);
+
+useEffect(() => {
+  fetch("https://projectii-production.up.railway.app/api/orderlist")
+    .then((res) => res.json())
+    .then((data) => setDishList(data))
+    .catch((err) => console.error("Lỗi khi lấy danh sách món ăn:", err));
+}, []);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -668,6 +686,46 @@
                   {/* Nửa bên trái */}
                   <div className="manage-goods">
                     {/* Nội dung lịch sử trái */}
+                    <div className="goods-layout-row">
+  <div className="goods-wrapper">
+    <h2 className="header">Danh sách món ăn</h2>
+    <table className="goods-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên món</th>
+          <th>Loại</th>
+          <th>Giá</th>
+          <th>Số lượng còn</th>
+          <th>Ảnh</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dishList.map((dish) => (
+          <tr key={dish.id_dish}>
+            <td>{dish.id_dish}</td>
+            <td>{dish.dish_name}</td>
+            <td>{dish.type_of_dish}</td>
+            <td>{dish.dish_cost.toLocaleString("vi-VN")}đ</td>
+            <td>{dish.dish_stock}</td>
+            <td>
+              <img
+                src={dish.dish_image}
+                alt={dish.dish_name}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  objectFit: "cover",
+                  borderRadius: "6px",
+                }}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
                     </div>
                   {/* Nửa bên phải */}
                   <div className="manage-salary">
