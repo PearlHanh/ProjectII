@@ -1,8 +1,6 @@
 import "../CSS/HomePage.css"
 import { useState, useEffect } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
 import { RefreshCcw } from "lucide-react";
 export default function HomePage(){
@@ -165,18 +163,6 @@ const [selectedEmployee, setSelectedEmployee] = useState(null);
 const handleUpdateClick = (employee) => {
   setSelectedEmployee(employee);
   setTabType("update");
-};
-
-
-
-// Diem danh
-const [selectedDate, setSelectedDate] = useState(new Date());
-const handleDateClick = (date) => {
-  if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
-    setSelectedDate(null); // Bỏ chọn nếu nhấn lại đúng ngày đã chọn
-  } else {
-    setSelectedDate(date); // Chọn ngày mới
-  }
 };
     return(
     <div className="orderScreen">
@@ -342,6 +328,7 @@ const handleDateClick = (date) => {
                   <th>Giới tính</th>
                   <th>Số điện thoại</th>
                   <th>Vai trò</th>
+                  <th>Chấm công</th>
                   <th></th>
                 </tr>
               </thead>
@@ -354,6 +341,11 @@ const handleDateClick = (date) => {
                     <td>{emp.gender}</td>
                     <td>{emp.phone}</td>
                     <td>{emp.office_name}</td>
+                    <td>
+                      <input
+                      type="checkbox"
+                      />
+                      </td>
                     <td>
                       <button
                         className="update-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -401,17 +393,6 @@ const handleDateClick = (date) => {
                 </p>
                 <p>
                   <strong>ID công việc:</strong> {selectedEmployee.office_name}
-
-                  <Calendar
-  onChange={handleDateClick}
-  value={selectedDate}
-  tileClassName={({ date }) =>
-    selectedDate &&
-    date.toDateString() === selectedDate.toDateString()
-      ? "selected-date"
-      : null
-  }
-/>
                 </p>
               </div>
             </div>
