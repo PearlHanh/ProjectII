@@ -699,7 +699,6 @@ useEffect(() => {
               {activedId === 4 && <div className="managetable">
               <div className="table4">
                   {/* Nửa bên trái */}
-                  <div className="manage-layout">
                     {/* Nội dung lịch sử trái */}
   <div className="goods-wrapper">
     <table className="goods-table">
@@ -770,7 +769,7 @@ useEffect(() => {
                     {/* Nội dung lịch sử phải */}
                     </div>
 </div>
-                    </div>
+              
               }
               </div>
               </div>

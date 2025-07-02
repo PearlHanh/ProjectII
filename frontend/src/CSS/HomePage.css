@@ -653,33 +653,6 @@
 }
 
 
-.manage-goods,
-.manage-salary {
-  flex: 1;           /* hoặc width: 50% nếu không dùng flex */
-  border-radius: 20px;   /* bo góc */
-  background-color: white; /* tuỳ ý */
-  padding: 16px;         /* tuỳ chọn để nội dung đẹp hơn */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* tuỳ chọn */
-  box-sizing: border-box;
-}
-
-
-
-
-
-.goods-table-wrapper {
-    flex: 0 0 50%;
-    height: 80%;
-    align-self: flex-start;
-    width: 100%;
-    overflow-y: auto;  /* ✅ Thanh cuộn nếu nội dung quá dài */
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    box-sizing: border-box;
-  }
 
 
 .goods-table {
@@ -711,14 +684,14 @@
 
 .goods-wrapper,
 .salary-wrapper {
-  flex: 1; /* Chia đều */
-  height: 100%; /* full chiều cao của .table4 */
+  width: 50%;              /* ✅ CHIA ĐỀU 50% */
+  height: 100%;            /* hoặc 80% nếu muốn */
   overflow-y: auto;
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 10px;
   background-color: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   box-sizing: border-box;
 }
 .salary-table {
