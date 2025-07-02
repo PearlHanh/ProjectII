@@ -379,7 +379,26 @@ const handleSaveEdit = async (id_dish) => {
 };
 
 
+const handleDeleteDish = async (id_dish) => {
+  if (!window.confirm("Bạn có chắc chắn muốn xoá món ăn này?")) return;
 
+  try {
+    const res = await fetch(`https://projectii-production.up.railway.app/api/dish/${id_dish}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) throw new Error("Xoá thất bại");
+
+    // Xoá thành công => cập nhật lại danh sách
+    const updated = await fetch("https://projectii-production.up.railway.app/api/orderlist").then(r => r.json());
+    setDishList(updated);
+
+    alert("✅ Đã xoá món ăn");
+  } catch (err) {
+    console.error(err);
+    alert("❌ Lỗi khi xoá món ăn");
+  }
+};
 
 
 
@@ -802,7 +821,9 @@ const handleSaveEdit = async (id_dish) => {
 </button>
                 </td>
                 <td>
-                  <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                  <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  onClick={() => handleDeleteDish(dish.id_dish)}>
+
                     <Trash className="w-5 h-5" />
                   </button>
                 </td>
