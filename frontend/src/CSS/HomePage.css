@@ -524,7 +524,22 @@
 .tk-btn {
   position: absolute;
   bottom: 20px; /* cách đáy 20px */
-  left: 450px;   /* cách trái 20px */
+  left: 800px;   /* cách trái 20px */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.add-employee-button{
+  position: absolute;
+  bottom: 20px; /* cách đáy 20px */
+  left: 750px;   /* cách trái 20px */
   padding: 10px 20px;
   background-color: #007bff;
   color: white;

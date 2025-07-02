@@ -436,6 +436,8 @@ useEffect(() => {
             </table>
           </div>
           <button className="tk-btn">xác nhận</button>
+          <button className="add-employee-button">Thêm nhân viên
+</button>
           {/* Tab cập nhật */}
           {tabType === "update" && selectedEmployee && (
             <div className="tab-content-box">
