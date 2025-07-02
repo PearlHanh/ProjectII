@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
+import { RefreshCcw } from "lucide-react";
 export default function HomePage(){
   // calendar
   const [markedDates, setMarkedDates] = useState([]);
@@ -317,7 +318,7 @@ useEffect(() => {
 */}
 <div>
   <div className="timekeeping-container">
-      <h4>Danh sách nhân viên</h4>
+      <h1>Danh sách nhân viên</h1>
       <table className="employee-table">
         <thead>
           <tr>
@@ -341,10 +342,9 @@ useEffect(() => {
               <td>{emp.id_office}</td>
               <td>
               <button
-                  className="update-button"
-                  onClick={() => handleUpdateClick(emp)}
-                >
-                  🔄
+              className="update-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => handleUpdateClick(emp)}>
+                <RefreshCcw className="w-5 h-5" />
                 </button>
                 </td>
             </tr>
