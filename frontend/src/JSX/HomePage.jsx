@@ -346,9 +346,37 @@ useEffect(() => {
 
 
 
+const [editingRowId, setEditingRowId] = useState(null);
+const [editValues, setEditValues] = useState({ dish_cost: "", dish_stock: "" });
 
 
+const handleSaveEdit = async (id_dish) => {
+  try {
+    const res = await fetch(`https://projectii-production.up.railway.app/api/orderlist/${id_dish}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        dish_cost: parseInt(editValues.dish_cost),
+        dish_stock: parseInt(editValues.dish_stock)
+      })
+    });
 
+    if (!res.ok) throw new Error("Cập nhật thất bại");
+
+    alert("✅ Cập nhật thành công");
+
+    // Cập nhật lại danh sách món ăn
+    const updated = await fetch("https://projectii-production.up.railway.app/api/orderlist").then(r => r.json());
+    setDishList(updated);
+
+    setEditingRowId(null);
+  } catch (err) {
+    console.error(err);
+    alert("❌ Lỗi khi cập nhật");
+  }
+};
 
 
 
@@ -712,6 +740,7 @@ useEffect(() => {
               <th>Ảnh</th>
               <th></th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -720,8 +749,35 @@ useEffect(() => {
                 <td>{dish.id_dish}</td>
                 <td>{dish.dish_name}</td>
                 <td>{dish.type_of_dish}</td>
-                <td>{dish.dish_cost.toLocaleString("vi-VN")}đ</td>
-                <td>{dish.dish_stock}</td>
+                <td>
+  {editingRowId === dish.id_dish ? (
+    <input
+      type="number"
+      value={editValues.dish_cost}
+      onChange={(e) =>
+        setEditValues({ ...editValues, dish_cost: e.target.value })
+      }
+      onBlur={() => handleSaveEdit(dish.id_dish)}
+    />
+  ) : (
+    dish.dish_cost.toLocaleString("vi-VN") + "đ"
+  )}
+</td>
+
+<td>
+  {editingRowId === dish.id_dish ? (
+    <input
+      type="number"
+      value={editValues.dish_stock}
+      onChange={(e) =>
+        setEditValues({ ...editValues, dish_stock: e.target.value })
+      }
+      onBlur={() => handleSaveEdit(dish.id_dish)}
+    />
+  ) : (
+    dish.dish_stock
+  )}
+</td>
                 <td>
                   <img
                     src={dish.dish_image}
@@ -735,15 +791,35 @@ useEffect(() => {
                   />
                 </td>
                 <td>
-                  <button className="update2-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                    <RefreshCcw className="w-5 h-5" />
-                  </button>
+                <button
+  className="update2-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+  onClick={() => {
+    setEditingRowId(dish.id_dish);
+    setEditValues({ dish_cost: dish.dish_cost, dish_stock: dish.dish_stock });
+  }}
+>
+  <RefreshCcw className="w-5 h-5" />
+</button>
                 </td>
                 <td>
                   <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                     <Trash className="w-5 h-5" />
                   </button>
                 </td>
+                <td>
+  {editingRowId === dish.id_dish ? (
+    <button
+      className="save-button p-2 bg-green-500 text-white rounded hover:bg-green-600"
+      onClick={() => handleSaveEdit(dish.id_dish)}
+    >
+      Lưu
+    </button>
+  ) : (
+    <button className="delete-button flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+      <Trash className="w-5 h-5" />
+    </button>
+  )}
+</td>
               </tr>
             ))}
           </tbody>

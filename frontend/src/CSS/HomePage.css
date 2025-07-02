@@ -711,3 +711,20 @@
 .salary-table th {
   background-color: #f4f4f4;
 }
+
+
+
+.save-button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.save-button:hover {
+  background-color: #16a34a;
+}
