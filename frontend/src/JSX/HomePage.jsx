@@ -378,6 +378,50 @@ const handleSaveEdit = async (id_dish) => {
   }
 };
 
+const handleAddDish = async () => {
+  const { dish_name, type_of_dish, dish_cost, dish_stock, dish_image } = newDish;
+
+  // Kiểm tra rỗng
+  if (!dish_name || !type_of_dish || !dish_cost || !dish_stock || !dish_image) {
+    alert("❌ Vui lòng điền đầy đủ thông tin món ăn.");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://projectii-production.up.railway.app/api/dish/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        dish_name,
+        type_of_dish,
+        dish_cost: parseInt(dish_cost),
+        dish_stock: parseInt(dish_stock),
+        dish_image
+      })
+    });
+
+    if (!res.ok) throw new Error("Thêm món ăn thất bại");
+
+    alert("✅ Đã thêm món ăn!");
+
+    // Làm mới danh sách món ăn
+    const updated = await fetch("https://projectii-production.up.railway.app/api/orderlist").then(r => r.json());
+    setDishList(updated);
+
+    // Reset form
+    setNewDish({
+      dish_name: "",
+      type_of_dish: "",
+      dish_cost: "",
+      dish_stock: "",
+      dish_image: ""
+    });
+  } catch (err) {
+    console.error(err);
+    alert("❌ Có lỗi xảy ra khi thêm món ăn.");
+  }
+};
+
 
 const handleDeleteDish = async (id_dish) => {
   if (!window.confirm("Bạn có chắc chắn muốn xoá món ăn này?")) return;
