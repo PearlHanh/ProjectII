@@ -399,7 +399,13 @@ const handleDeleteDish = async (id_dish) => {
     alert("❌ Lỗi khi xoá món ăn");
   }
 };
-
+const [newDish, setNewDish] = useState({
+  dish_name: "",
+  type_of_dish: "",
+  dish_cost: "",
+  dish_stock: "",
+  dish_image: ""
+});
 
 
 
