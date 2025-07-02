@@ -892,25 +892,6 @@ const [newDish, setNewDish] = useState({
       </div>
 
       {/* Bên phải - Cùng cấp với goods-wrapper */}
-      <div className="salary-wrapper">
-        <table className="salary-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Tên nhân viên</th>
-              <th>Ngày</th>
-              <th>Giờ vào</th>
-              <th>Giờ ra</th>
-              <th>Số giờ làm</th>
-              <th>Lương</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Nội dung bảng lương */}
-          </tbody>
-        </table>
-      </div>
       <div className="goods-wrapper add-form-wrapper">
     <h3>➕ Thêm món ăn mới</h3>
     <div className="form-row">
