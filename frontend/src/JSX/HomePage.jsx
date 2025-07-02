@@ -213,18 +213,13 @@ const handleUpdateEmployee = async () => {
 
 
 const handleConfirmUpdate = () => {
+  const { id_employee, employee_name, birthday, gender, phone, office_name } = formData;
   fetch(`https://projectii-production.up.railway.app/api/employee/${selectedEmployee.id_employee}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      employee_name,
-      birthday,
-      gender,
-      phone,
-      office_name
-    }),
+    body: JSON.stringify({ employee_name, birthday, gender, phone, office_name }),
   })
     .then((res) => {
       if (!res.ok) throw new Error("Cập nhật thất bại");
