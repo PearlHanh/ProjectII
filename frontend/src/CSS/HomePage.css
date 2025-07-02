@@ -490,3 +490,12 @@
 .tab-body p {
   margin: 4px 0;
 }
+.header-employee {
+  font-size: 2rem;              /* Tăng kích cỡ */
+  font-weight: 700;             /* In đậm */
+  text-align: center;           /* Căn giữa */
+  color: #2c3e50;               /* Màu chữ đậm, dễ nhìn */
+  margin-bottom: 20px;          /* Khoảng cách với bảng bên dưới */
+  font-family: "Be Vietnam Pro", sans-serif;
+  letter-spacing: 0.5px;        /* Tăng khoảng cách chữ */    /* Viết hoa toàn bộ */
+}
