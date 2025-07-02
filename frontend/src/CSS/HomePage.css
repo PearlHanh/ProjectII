@@ -638,8 +638,8 @@
 .table4 {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; /* căn cách đều hai phần */
-  align-items: stretch;           /* kéo hai cột bằng chiều cao */
+  justify-content: space-between;
+  align-items: stretch;
   background-color: white;
   height: 85%;
   width: 97%;
@@ -649,7 +649,7 @@
   border-radius: 20px;
   overflow: hidden;
   padding: 10px;
-  gap: 20px; /* thêm khoảng cách giữa hai cột */
+  gap: 20px;
 }
 
 
@@ -709,23 +709,10 @@
   overflow: hidden;
 }
 
-.goods-wrapper{
-  flex: 0 0 50%;
-  height: 80%;
-  align-self: flex-start;
-  overflow-y: auto;  /* ✅ Thanh cuộn nếu nội dung quá dài */
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  box-sizing: border-box;
-}
-
-.salary-wrapper{
-  flex: 1;
-  height: 80%;
-  align-self: flex-start;
+.goods-wrapper,
+.salary-wrapper {
+  flex: 1; /* Chia đều */
+  height: 100%; /* full chiều cao của .table4 */
   overflow-y: auto;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -733,9 +720,7 @@
   background-color: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
-
 }
-
 .salary-table {
   width: 100%;
   border-collapse: collapse;
