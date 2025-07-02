@@ -282,6 +282,23 @@ app.get("/api/statistics/dish", async (req, res) => {
   }
 });
 
+app.post("/api/dish/create", async (req, res) => {
+  const { id_dish, dish_name, type_of_dish, dish_cost, dish_stock, dish_image } = req.body;
+
+  try {
+    const query = `
+      INSERT INTO dish (id_dish, dish_name, type_of_dish, dish_cost, dish_stock, dish_image)
+      VALUES ($1, $2, $3, $4, $5, $6)
+    `;
+    await db.query(query, [id_dish, dish_name, type_of_dish, dish_cost, dish_stock, dish_image]);
+
+    return res.status(201).json({ message: "✅ Món ăn đã được thêm" });
+  } catch (err) {
+    console.error("❌ Lỗi khi thêm món:", err);
+    return res.status(500).json({ error: "Lỗi khi thêm món ăn" });
+  }
+});
+
 // Cap nhat thong tin nhan vien
 app.put("/api/employee/:id", async (req, res) => {
   const { id } = req.params;
