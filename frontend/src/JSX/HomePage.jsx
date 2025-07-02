@@ -561,92 +561,103 @@
   Thêm nhân viên
 </button>
             {/* Tab cập nhật */}
-            {tabType === "update" && selectedEmployee && (
-              <div className="tab-content-box">
-                <div className="tab-header">
-                  <span>
-                    Cập nhật nhân viên: {selectedEmployee.employee_name}
-                  </span>
-                  <button
-                    onClick={() => setTabType(null)}
-                    className="tab-close"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div className="tab-body">
-    <div className="form-group">
-      <div className="form-label">ID:</div>
-      <div className="form-value">{formData.id_employee}</div>
+            {tabType && (
+  <div className="tab-content-box">
+    <div className="tab-header">
+      <span>
+        {tabType === "update"
+          ? `Cập nhật nhân viên: ${formData.employee_name}`
+          : "Thêm nhân viên mới"}
+      </span>
+      <button
+        onClick={() => setTabType(null)}
+        className="tab-close"
+      >
+        ✕
+      </button>
     </div>
 
-    <div className="form-group">
-      <label>Tên:</label>
-      <input
-        type="text"
-        value={formData.employee_name}
-        onChange={(e) =>
-          setFormData({ ...formData, employee_name: e.target.value })
-        }
-      />
+    <div className="tab-body">
+      <div className="form-group">
+        <label>ID:</label>
+        <input
+          type="text"
+          value={formData.id_employee}
+          onChange={(e) =>
+            setFormData({ ...formData, id_employee: e.target.value })
+          }
+          disabled={tabType === "update"} // ❗ khóa ID nếu đang update
+        />
+      </div>
+
+      {/* Các input khác giữ nguyên */}
+      <div className="form-group">
+        <label>Tên:</label>
+        <input
+          type="text"
+          value={formData.employee_name}
+          onChange={(e) =>
+            setFormData({ ...formData, employee_name: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label>Ngày sinh:</label>
+        <input
+          type="date"
+          value={formData.birthday}
+          onChange={(e) =>
+            setFormData({ ...formData, birthday: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label>Giới tính:</label>
+        <input
+          type="text"
+          value={formData.gender}
+          onChange={(e) =>
+            setFormData({ ...formData, gender: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label>SDT:</label>
+        <input
+          type="text"
+          value={formData.phone}
+          onChange={(e) =>
+            setFormData({ ...formData, phone: e.target.value })
+          }
+        />
+      </div>
+      <div className="form-group">
+        <label>Công việc:</label>
+        <select
+          value={formData.office_name}
+          onChange={(e) =>
+            setFormData({ ...formData, office_name: e.target.value })
+          }
+        >
+          {offices.map((office) => (
+            <option key={office.id_office} value={office.office_name}>
+              {office.office_name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
 
-    <div className="form-group">
-      <label>Ngày sinh:</label>
-      <input
-        type="date"
-        value={formData.birthday}
-        onChange={(e) =>
-          setFormData({ ...formData, birthday: e.target.value })
-        }
-      />
-    </div>
-
-    <div className="form-group">
-      <label>Giới tính:</label>
-      <input
-        type="text"
-        value={formData.gender}
-        onChange={(e) =>
-          setFormData({ ...formData, gender: e.target.value })
-        }
-      />
-    </div>
-
-    <div className="form-group">
-      <label>SDT:</label>
-      <input
-        type="text"
-        value={formData.phone}
-        onChange={(e) =>
-          setFormData({ ...formData, phone: e.target.value })
-        }
-      />
-    </div>
-
-    <div className="form-group">
-      <label>Công việc:</label>
-      <select
-    value={formData.office_name}
-    onChange={e => setFormData({ ...formData, office_name: e.target.value })}
-  >
-    {offices.map((office) => (
-      <option key={office.id_office} value={office.office_name}>
-        {office.office_name}
-      </option>
-    ))}
-  </select>
+    <div className="tab-footer">
+      <button
+        className="update-confirm-button"
+        onClick={handleSubmitEmployee}
+      >
+        xác nhận
+      </button>
     </div>
   </div>
-                  <div className="tab-footer">
-                  <button
-                    className="update-confirm-button"
-                    onClick={handleConfirmUpdate}
-                    >xác nhận</button>
-                    </div>
-                </div>
-              
-            )}
+)}
           </div>
         </div>
       </div>
