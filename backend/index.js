@@ -6,9 +6,9 @@
   dotenv.config();
 
   const payos = new PayOS(
-    process.env.PAYOS_CLIENT_ID,
-    process.env.PAYOS_API_KEY,
-    process.env.PAYOS_CHECKSUM_KEY
+    "0759ddc3-fabe-43e6-a616-269ec89b29a8",
+    "849cf761-8324-48c8-859e-323c38833f42",
+    "52677c957fceb665bd9b11b21cd5aa1b0c5c1d2cc1a9e7d761a34823a548bcaf"
   );
 
   const app = express();
