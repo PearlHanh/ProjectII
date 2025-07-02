@@ -737,6 +737,7 @@ useEffect(() => {
                     </div>
                   {/* Nửa bên phải */}
                   <div className="manage-salary">
+                    <h1> badbajdbaksbdasbdsadsajdb</h1>
                     {/* Nội dung lịch sử phải */}
                     </div>
                     </div>
