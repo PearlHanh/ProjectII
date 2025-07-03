@@ -971,7 +971,7 @@ useEffect(() => {
       )}
 
 {activedId === 5 && (
-  <div className="salarytable">
+  <div className="table5">
 
   </div>
 )}
