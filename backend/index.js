@@ -423,6 +423,25 @@
     }
   });
 
+  // Cham cong nhan vien
+  app.get("/api/timekeeping/today", async (req, res) => {
+    const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  
+    try {
+      const result = await db.query(
+        `SELECT id_employee FROM login.timekeeping WHERE day = $1 AND is_presence = 1`,
+        [today]
+      );
+      const ids = result.rows.map((row) => row.id_employee);
+      return res.status(200).json(ids); // Trả về danh sách ID đã chấm công
+    } catch (err) {
+      console.error("Lỗi khi lấy dữ liệu chấm công hôm nay:", err);
+      return res.status(500).json({ error: "Lỗi server" });
+    }
+  });
+
+
+  
   // Lấy danh sách nhân viên
   app.get("/api/employee", async (req, res) => {
     try {

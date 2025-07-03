@@ -243,68 +243,66 @@
 
   // Checkbox cho nhân viên
   const [checkedEmployees, setCheckedEmployees] = useState({});
-
-  const handleConfirmAttendance = () => {
-  const today = dayjs().format("YYYY-MM-DD");
-  const entries = Object.entries(checkedEmployees);
-
-  const dataToSend = entries.map(([id_employee, isChecked]) => ({
-    id_employee,
-    day: today,
-    is_presence: isChecked ? 1 : 0,
-  }));
-
-  fetch("https://projectii-production.up.railway.app/api/timekeeping", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ data: dataToSend }),
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error("Lỗi khi chấm công");
-      
-      // ✅ Cập nhật những checkbox đã tick để khóa
-      setDisabledEmployees((prev) => {
-        const updated = { ...prev };
-        Object.entries(checkedEmployees).forEach(([id, isChecked]) => {
-          if (isChecked) {
-            updated[id] = true;
-          }
-        });
-        return updated;
-      });
-
-      alert("✅ Chấm công thành công");
-    })
-    .catch((err) => {
-      console.error(err);
-      alert("❌ Có lỗi khi chấm công");
-    });
-};
-
   const [disabledEmployees, setDisabledEmployees] = useState({});
-
+  
+  // ✅ Gọi API để lấy danh sách nhân viên đã chấm công hôm nay
   useEffect(() => {
-    const saved = localStorage.getItem("disabledEmployees");
-    if (saved) {
-      setDisabledEmployees(JSON.parse(saved));
-    }
+    const fetchTodayAttendance = async () => {
+      try {
+        const res = await fetch("https://projectii-production.up.railway.app/api/timekeeping/today");
+        if (!res.ok) throw new Error("Không lấy được danh sách đã chấm công");
+        const ids = await res.json(); // giả sử API trả về mảng id_employee
+        const disabledMap = {};
+        ids.forEach(id => {
+          disabledMap[id] = true;
+        });
+        setDisabledEmployees(disabledMap);
+      } catch (err) {
+        console.error("Lỗi khi kiểm tra chấm công hôm nay:", err);
+      }
+    };
+  
+    fetchTodayAttendance();
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("disabledEmployees", JSON.stringify(disabledEmployees));
-  }, [disabledEmployees]);
-
-  useEffect(() => {
+  
+  // ✅ Hàm xác nhận chấm công
+  const handleConfirmAttendance = () => {
     const today = dayjs().format("YYYY-MM-DD");
-    const lastDate = localStorage.getItem("attendanceDate");
-
-    if (lastDate !== today) {
-      localStorage.removeItem("disabledEmployees");
-      localStorage.setItem("attendanceDate", today);
-      setDisabledEmployees({});
-    }
-  }, []);
-
+    const entries = Object.entries(checkedEmployees);
+  
+    const dataToSend = entries.map(([id_employee, isChecked]) => ({
+      id_employee,
+      day: today,
+      is_presence: isChecked ? 1 : 0,
+    }));
+  
+    fetch("https://projectii-production.up.railway.app/api/timekeeping", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: dataToSend }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Lỗi khi chấm công");
+  
+        alert("✅ Chấm công thành công");
+  
+        // ✅ Gọi lại API để cập nhật danh sách đã bị khóa
+        return fetch("https://projectii-production.up.railway.app/api/timekeeping/today");
+      })
+      .then((res) => res.json())
+      .then((ids) => {
+        const disabledMap = {};
+        ids.forEach(id => {
+          disabledMap[id] = true;
+        });
+        setDisabledEmployees(disabledMap);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("❌ Có lỗi khi chấm công");
+      });
+  };
+  
 
   const handleSubmitEmployee = async () => {
     const { id_employee, employee_name, birthday, gender, phone, office_name } = formData;
@@ -973,7 +971,7 @@ useEffect(() => {
 
 {activedId === 5 && (
   <div className="table5">
-
+    
   </div>
 )}
       </div>
