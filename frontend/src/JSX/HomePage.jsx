@@ -464,12 +464,16 @@ const handlePay = async () => {
       body: JSON.stringify({
         orderCode: Date.now(),
         amount: total,
-        description: `Thanh toan ban ${selectedTable}`,
+        description: `Thanh toán bàn ${selectedTable}`,
       }),
     });
+
     const data = await res.json();
     console.log("Link thanh toán:", data);
+
     if (data.checkoutUrl) {
+      // Gắn event listener để xóa order sau khi thanh toán xong (sau khi quay lại từ PayOS)
+      window.localStorage.setItem("pendingClearTable", selectedTable); // lưu để xử lý sau
       window.location.href = data.checkoutUrl;
     } else {
       throw new Error(data.error);
@@ -479,6 +483,26 @@ const handlePay = async () => {
     alert("Thanh toán thất bại");
   }
 };
+useEffect(() => {
+  const tableToClear = localStorage.getItem("pendingClearTable");
+
+  // Nếu có bàn cần xóa (sau khi quay lại từ PayOS)
+  if (tableToClear) {
+    fetch(`https://projectii-production.up.railway.app/api/ordertable/delete/${tableToClear}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Đã xoá món sau thanh toán:", data);
+        setOrderedDishes([]); // clear UI
+        setSelectedTable(null);
+        localStorage.removeItem("pendingClearTable");
+      })
+      .catch((err) => {
+        console.error("Lỗi khi xóa món sau thanh toán:", err);
+      });
+  }
+}, []);
 
 
       return(
