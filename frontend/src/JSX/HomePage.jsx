@@ -301,6 +301,7 @@
     if (lastDate !== today) {
       localStorage.removeItem("disabledEmployees");
       localStorage.setItem("attendanceDate", today);
+      setDisabledEmployees({});
     }
   }, []);
 
