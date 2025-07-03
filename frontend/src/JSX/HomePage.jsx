@@ -488,6 +488,7 @@ const handlePay = async () => {
               <button className="btn goods" onClick={() => handleButtonClick(2)}>Goods</button>
               <button className="btn timesheet" onClick={() => handleButtonClick(3)}>Time Sheet</button>
               <button className="btn manageBtn" onClick={() => handleButtonClick(4)}>Manage</button>
+              <button className="btn salarysheet" onClick={() => handleButtonClick(5)}>Salary</button>
               <div className="spacer"></div>
           </div>
 
@@ -944,7 +945,13 @@ const handlePay = async () => {
   </div>
 
       )}
+
+{activedId === 5 && (
+  <div className="salarytable">
+
+  </div>
+)}
       </div>
       </div>
   );
-}
+    };
