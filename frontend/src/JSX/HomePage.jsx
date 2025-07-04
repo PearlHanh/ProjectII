@@ -1090,7 +1090,7 @@ useEffect(() => {
                   {(row.daily_wage * row.days_present + row.bonus).toLocaleString()}đ
                 </td>
                 <td>
-                  {isPaid ? (
+                  {row.status === 1 ? (
                     <span className="text-green-600">Đã thanh toán</span>
                   ) : (
                     <span className="text-red-500">Chưa thanh toán</span>
