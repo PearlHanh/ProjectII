@@ -593,6 +593,16 @@ useEffect(() => {
               <button className="btn timesheet" onClick={() => handleButtonClick(3)}>Time Sheet</button>
               <button className="btn manageBtn" onClick={() => handleButtonClick(4)}>Manage</button>
               <button className="btn salarysheet" onClick={() => handleButtonClick(5)}>Salary</button>
+              <button
+  className="btn logout"
+  onClick={() => {
+    if (window.confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+      window.location.href = "/"; // hoặc dùng navigate nếu có React Router
+    }
+  }}
+>
+  Log out
+</button>
               <div className="spacer"></div>
           </div>
 
