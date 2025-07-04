@@ -9,21 +9,34 @@ export default function Login() {
   const [hasBackground, setHasBackground] = useState(true);
   const navigate = useNavigate();
   const loginOnClick = async () => {
-    const res = await fetch("https://projectii-production.up.railway.app/api/login", {  
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, password })
-    });
-
-    const data = await res.json();
-    if(data.message == "1"){
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/homepage");  
-    }
+    const loginOnClick = async () => {
+      const res = await fetch("https://projectii-production.up.railway.app/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      });
     
-  };
+      const data = await res.json();
+    
+      if (data.success) {
+        // ✅ Có id_office thì xử lý route tại đây
+        switch (data.id_office) {
+          case "QL":
+            navigate("/manage-dashboard");
+            break;
+          case "NV":
+            navigate("/homepage");
+            break;
+          default:
+            navigate("/login");
+        }
+      } else {
+        alert("Sai tài khoản hoặc mật khẩu");
+      }
+    };
+};
 // Chinh background
   
   useEffect(() => {
