@@ -509,6 +509,16 @@ const [selectedMonth, setSelectedMonth] = useState(dayjs().format("YYYY-MM"));
 const [salaryData, setSalaryData] = useState([]);
 const [paidStatus, setPaidStatus] = useState({}); // {id_employee: true/false}
 const [disabledCheckboxes, setDisabledCheckboxes] = useState({});
+const fetchSalaryData = async () => {
+  try {
+    const res = await fetch(`https://projectii-production.up.railway.app/api/salary?month=${selectedMonth}`);
+    if (!res.ok) throw new Error("Lỗi khi lấy dữ liệu lương");
+    const data = await res.json();
+    setSalaryData(data);
+  } catch (err) {
+    console.error("Lỗi khi fetch salary:", err);
+  }
+};
 
 
 useEffect(() => {
