@@ -773,3 +773,70 @@
   flex-direction: row;
   overflow: hidden;
 }
+
+.salary-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.salary-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 30px;
+  width: 100%;
+  max-width: 1100px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.salary-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e40af;
+  margin-bottom: 20px;
+}
+
+.month-selector {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.month-selector input[type="month"] {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.salary-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.salary-table th,
+.salary-table td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+}
+
+.salary-table th {
+  background-color: #e0f2fe;
+  font-weight: bold;
+}
+
+.salary-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.salary-table .highlight {
+  color: green;
+  font-weight: bold;
+}

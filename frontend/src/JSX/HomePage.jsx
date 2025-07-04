@@ -1003,52 +1003,58 @@ useEffect(() => {
       )}
 
 {activedId === 5 && (
-  <div className="table5">
-     <div className="mb-4">
-    <label className="font-semibold mr-2">Chọn tháng:</label>
-    <input
-      type="month"
-      value={selectedMonth}
-      onChange={(e) => setSelectedMonth(e.target.value)}
-      className="border p-1 rounded"
-    />
-  </div>
-    <div className="salary-wrapper">
-      <table className="salary-table">
-      <thead>
-    <tr className="bg-gray-100">
-    <th >ID</th>
-    <th >Tên nhân viên</th>
-    <th >Giới tính</th>
-    <th >SĐT</th>
-    <th >Phòng ban</th>
-    <th >Số ngày công</th>
-    <th >Lương/ngày</th>
-    <th >Thưởng</th>
-    <th >Tổng lương</th>
-    </tr>
-  </thead>
-  <tbody>
-  {salaryData.map((row) => (
-    <tr key={row.id_employee}>
-      <td >{row.id_employee}</td>
-      <td >{row.employee_name}</td>
-      <td >{row.gender}</td>
-      <td >{row.phone}</td>
-      <td >{row.office_name}</td>
-      <td >{row.days_present}</td>
-      <td >{row.daily_wage.toLocaleString()}đ</td>
-      <td >{row.bonus.toLocaleString()}đ</td>
-      <td className="border px-4 py-2 text-green-600 font-semibold">
-        {(row.daily_wage * row.days_present + row.bonus).toLocaleString()}đ
-      </td>
-    </tr>
-  ))}
-  </tbody>
+  <div className="salary-container">
+    <div className="salary-card">
+      <h2 className="salary-title">Bảng lương nhân viên</h2>
+
+      <div className="month-selector">
+        <label htmlFor="month">Chọn tháng:</label>
+        <input
+          type="month"
+          id="month"
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+        />
+      </div>
+
+      <div className="table-wrapper">
+        <table className="salary-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên nhân viên</th>
+              <th>Giới tính</th>
+              <th>SĐT</th>
+              <th>Phòng ban</th>
+              <th>Số ngày công</th>
+              <th>Lương/ngày</th>
+              <th>Thưởng</th>
+              <th>Tổng lương</th>
+            </tr>
+          </thead>
+          <tbody>
+            {salaryData.map((row) => (
+              <tr key={row.id_employee}>
+                <td>{row.id_employee}</td>
+                <td>{row.employee_name}</td>
+                <td>{row.gender}</td>
+                <td>{row.phone}</td>
+                <td>{row.office_name}</td>
+                <td>{row.days_present}</td>
+                <td>{row.daily_wage.toLocaleString()}đ</td>
+                <td>{row.bonus.toLocaleString()}đ</td>
+                <td className="highlight">
+                  {(row.daily_wage * row.days_present + row.bonus).toLocaleString()}đ
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
+    </div>
   </div>
 )}
+
       </div>
       </div>
   );
