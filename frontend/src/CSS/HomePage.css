@@ -766,26 +766,36 @@
   position: fixed;
   top: 13%;
   left: 1.5%;
-  align-items: center; /* center theo chiều dọc */
-  justify-content: center; /* center theo chiều ngang */
+  align-items: center;
+  justify-content: center;
   border-radius: 20px;
-  
   flex-direction: row;
   overflow: hidden;
 }
 
-.salary-header {
+/* Container nội dung bảng lương bên trong table5 */
+.salary-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 95%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Header chứa tiêu đề và select */
+.table5-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
 .salary-title {
   font-size: 24px;
   font-weight: bold;
-  color: #1e40af;
+  color: #1d4ed8;
 }
 
 .month-selector {
@@ -794,18 +804,16 @@
   gap: 10px;
 }
 
-.month-selector label {
-  font-weight: 500;
-}
-
 .month-selector input[type="month"] {
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 5px 10px;
+  border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.salary-wrapper {
-  overflow-x: auto;
+/* Table body */
+.table5-body {
+  overflow: auto;
+  flex: 1;
 }
 
 .salary-table {
@@ -816,75 +824,16 @@
 
 .salary-table th,
 .salary-table td {
-  border: 1px solid #ddd;
   padding: 8px 12px;
+  border: 1px solid #ddd;
 }
 
 .salary-table th {
-  background-color: #f0f9ff;
-  font-weight: bold;
+  background-color: #f3f4f6;
 }
 
 .salary-table tr:hover {
-  background-color: #f9f9f9;
-}
-
-.salary-table .highlight {
-  color: green;
-  font-weight: bold;
-}.salary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
-}
-
-.salary-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1e40af;
-}
-
-.month-selector {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.month-selector label {
-  font-weight: 500;
-}
-
-.month-selector input[type="month"] {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.salary-wrapper {
-  overflow-x: auto;
-}
-
-.salary-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-}
-
-.salary-table th,
-.salary-table td {
-  border: 1px solid #ddd;
-  padding: 8px 12px;
-}
-
-.salary-table th {
-  background-color: #f0f9ff;
-  font-weight: bold;
-}
-
-.salary-table tr:hover {
-  background-color: #f9f9f9;
+  background-color: #f9fafb;
 }
 
 .salary-table .highlight {
