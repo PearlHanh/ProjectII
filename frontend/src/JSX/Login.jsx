@@ -26,7 +26,7 @@ export default function Login() {
             navigate("/manage-dashboard");
             break;
           case "NV":
-            navigate("/homepageNV");
+            navigate("/homepage");
             break;
           default:
             navigate("/login");
