@@ -17,6 +17,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/login" element={<Login />}/>         
         <Route path="/order/:tableID" element={<Order />} />
         <Route path='/order/:tableID/cart' element={<Cart />}  />
   </Routes>
