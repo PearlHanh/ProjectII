@@ -16,8 +16,7 @@ export default function App() {
               <HomePage />
             </PrivateRoute>
           }
-        />
-        <Route path="/homepageNV" element={<HomePageNV />} />       
+        />       
         <Route path="/order/:tableID" element={<Order />} />
         <Route path='/order/:tableID/cart' element={<Cart />}  />
   </Routes>
