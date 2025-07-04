@@ -507,6 +507,9 @@ useEffect(() => {
 // Tinh tien luong
 const [selectedMonth, setSelectedMonth] = useState(dayjs().format("YYYY-MM"));
 const [salaryData, setSalaryData] = useState([]);
+const [paidStatus, setPaidStatus] = useState({}); // {id_employee: true/false}
+const [disabledCheckboxes, setDisabledCheckboxes] = useState({});
+
 
 useEffect(() => {
   const fetchData = async () => {
@@ -522,7 +525,42 @@ useEffect(() => {
 
   fetchData();
 }, [selectedMonth]);
+// Xử lý khi nhấn nút xác nhận thanh toán
+const handleSalaryConfirm = async () => {
+  const checkedIds = Object.entries(paidStatus)
+    .filter(([_, checked]) => checked)
+    .map(([id]) => id);
 
+  if (checkedIds.length === 0) {
+    alert("Vui lòng chọn ít nhất 1 nhân viên để thanh toán");
+    return;
+  }
+
+  try {
+    await fetch("https://your-backend.com/api/timekeeping/status", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        month: selectedMonth,
+        employeeIds: checkedIds,
+      }),
+    });
+
+    alert("✅ Đã cập nhật trạng thái thanh toán");
+    // Reload bảng
+    fetchSalaryData();
+    setPaidStatus({});
+  } catch (err) {
+    console.error(err);
+    alert("❌ Cập nhật thất bại");
+  }
+};
+
+// Load lại từ localStorage nếu có
+useEffect(() => {
+  const saved = localStorage.getItem("disabledCheckboxes");
+  if (saved) setDisabledCheckboxes(JSON.parse(saved));
+}, []);
 
 
 
@@ -1033,6 +1071,8 @@ useEffect(() => {
               <th>Lương/ngày</th>
               <th>Thưởng</th>
               <th>Tổng lương</th>
+              <th>Trạng thái</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -1049,10 +1089,39 @@ useEffect(() => {
                 <td className="highlight">
                   {(row.daily_wage * row.days_present + row.bonus).toLocaleString()}đ
                 </td>
+                <td>
+                  {isPaid ? (
+                    <span className="text-green-600">Đã thanh toán</span>
+                  ) : (
+                    <span className="text-red-500">Chưa thanh toán</span>
+                  )}
+                </td>
+                <td>
+                <input
+        type="checkbox"
+        disabled={row.status === 1}
+        checked={paidStatus[row.id_employee] || false}
+        onChange={(e) =>
+          setPaidStatus((prev) => ({
+            ...prev,
+            [row.id_employee]: e.target.checked,
+          }))
+        }
+      />
+                </td>
+
               </tr>
             ))}
           </tbody>
         </table>
+        <div className="mt-4 text-right">
+        <button
+          onClick={handleSalaryConfirm}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Xác nhận thanh toán
+        </button>
+      </div>
       </div>
     </div>
   </div>
