@@ -440,6 +440,35 @@
     }
   });
 
+// Lấy danh sách nhân viên đã chấm công thansg nay
+app.get("/api/salary", async (req, res) => {
+  const { month } = req.query;
+  if (!month) return res.status(400).json({ error: "Missing month" });
+
+  try {
+    const result = await db.query(`
+      SELECT 
+        e.id_employee,
+        e.employee_name,
+        s.daily_wage,
+        s.bonus,
+        COUNT(t.*) AS days_present
+      FROM login.employee e
+      JOIN login.salary s ON e.id_office = s.id_office
+      LEFT JOIN login.timekeeping t 
+        ON t.id_employee = e.id_employee 
+        AND to_char(t.day, 'YYYY-MM') = $1
+        AND t.is_presence = 1
+      GROUP BY e.id_employee, e.employee_name, s.daily_wage, s.bonus
+      ORDER BY e.id_employee;
+    `, [month]);
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Lỗi khi truy vấn salary:", err);
+    res.status(500).json({ error: "Lỗi server" });
+  }
+});
 
   
   // Lấy danh sách nhân viên
