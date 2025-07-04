@@ -8,7 +8,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [hasBackground, setHasBackground] = useState(true);
   const navigate = useNavigate();
-  const loginOnClick = async () => {
     const loginOnClick = async () => {
       const res = await fetch("https://projectii-production.up.railway.app/api/login", {
         method: "POST",
@@ -17,9 +16,9 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password })
       });
-    
+  
       const data = await res.json();
-    
+  
       if (data.success) {
         // ✅ Có id_office thì xử lý route tại đây
         switch (data.id_office) {
@@ -36,7 +35,14 @@ export default function Login() {
         alert("Sai tài khoản hoặc mật khẩu");
       }
     };
-};
+  
+    useEffect(() => {
+      setHasBackground(true);
+      return () => {
+        setHasBackground(false);
+      };
+    }, []);
+  
 // Chinh background
   
   useEffect(() => {
