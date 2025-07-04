@@ -44,10 +44,12 @@
         `SELECT * FROM login.username WHERE username = $1 AND password = $2`,
         [username, password]
       );
+  
       if (result.rows.length > 0) {
-        return res.json({ success: true, message: "1" });
+        const user = result.rows[0];
+        return res.json({ success: true, id_office: user.id_office }); // 👈 Trả về id_office
       } else {
-        return res.json({ success: false, message: "0" });
+        return res.json({ success: false }); // ❌ Không đúng thì không cần message
       }
     } catch (err) {
       console.error("Lỗi truy vấn login:", err);
