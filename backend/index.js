@@ -448,31 +448,32 @@ app.get("/api/salary", async (req, res) => {
   try {
     const result = await db.query(`
       SELECT 
-        e.id_employee,
-        e.employee_name,
-        e.gender,
-        e.phone,
-        o.office_name,
-        COUNT(t.day) AS days_present,
-        s.daily_wage,
-        s.bonus,
-        MAX(t.status) AS status  -- ✅ Lấy trạng thái cao nhất của tháng đó
-      FROM login.employee e
-      JOIN login.salary s ON e.id_office = s.id_office
-      JOIN login.office o ON o.id_office = e.id_office
-      LEFT JOIN login.timekeeping t 
-        ON e.id_employee = t.id_employee 
-        AND to_char(t.day, 'YYYY-MM') = $1 
-        AND t.is_presence = 1
-      GROUP BY 
-        e.id_employee, 
-        e.employee_name, 
-        e.gender, 
-        e.phone, 
-        o.office_name, 
-        s.daily_wage, 
-        s.bonus
-      ORDER BY e.id_employee;
+  e.id_employee,
+  e.employee_name,
+  e.gender,
+  e.phone,
+  o.office_name,
+  COUNT(t.day) AS days_present,
+  s.daily_wage,
+  s.bonus,
+  MAX(COALESCE(t.status, 0)) AS status -- ✅ Thêm dòng này
+FROM login.employee e
+JOIN login.salary s ON e.id_office = s.id_office
+JOIN login.office o ON o.id_office = e.id_office
+LEFT JOIN login.timekeeping t 
+  ON e.id_employee = t.id_employee 
+  AND to_char(t.day, 'YYYY-MM') = $1 
+  AND t.is_presence = 1
+GROUP BY 
+  e.id_employee, 
+  e.employee_name, 
+  e.gender, 
+  e.phone, 
+  o.office_name, 
+  s.daily_wage, 
+  s.bonus
+ORDER BY e.id_employee;
+
     `, [month]);
 
     res.json(result.rows);
@@ -481,7 +482,6 @@ app.get("/api/salary", async (req, res) => {
     res.status(500).json({ error: "Lỗi server" });
   }
 });
-
 
 app.put("/api/timekeeping/status", async (req, res) => {
   const { month, employeeIds } = req.body;
