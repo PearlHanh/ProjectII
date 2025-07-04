@@ -448,19 +448,23 @@ app.get("/api/salary", async (req, res) => {
   try {
     const result = await db.query(`
       SELECT 
-        e.id_employee,
-        e.employee_name,
-        s.daily_wage,
-        s.bonus,
-        COUNT(t.*) AS days_present
-      FROM login.employee e
-      JOIN login.salary s ON e.id_office = s.id_office
-      LEFT JOIN login.timekeeping t 
-        ON t.id_employee = e.id_employee 
-        AND to_char(t.day, 'YYYY-MM') = $1
-        AND t.is_presence = 1
-      GROUP BY e.id_employee, e.employee_name, s.daily_wage, s.bonus
-      ORDER BY e.id_employee;
+  e.id_employee,
+  e.employee_name,
+  e.gender,
+  e.phone,
+  o.office_name,
+  COUNT(t.day) AS days_present,
+  s.daily_wage,
+  s.bonus
+FROM login.employee e
+JOIN login.salary s ON e.id_office = s.id_office
+JOIN login.office o ON o.id_office = e.id_office
+LEFT JOIN login.timekeeping t 
+  ON e.id_employee = t.id_employee 
+  AND to_char(t.day, 'YYYY-MM') = $1 
+  AND t.is_presence = 1
+GROUP BY e.id_employee, e.employee_name, e.gender, e.phone, o.office_name, s.daily_wage, s.bonus
+ORDER BY e.id_employee;
     `, [month]);
 
     res.json(result.rows);
