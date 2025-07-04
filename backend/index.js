@@ -488,7 +488,7 @@ app.put("/api/timekeeping/status", async (req, res) => {
 
   try {
     await db.query(
-      `UPDATE employee.timekeeping
+      `UPDATE login.timekeeping
        SET status = 1
        WHERE TO_CHAR(day, 'YYYY-MM') = $1
          AND id_employee = ANY($2::text[])`,
