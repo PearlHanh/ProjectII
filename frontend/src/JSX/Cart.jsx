@@ -60,12 +60,6 @@ export default function Cart() {
                 <p>Số lượng: {order.dish_quantity}</p>
                 <p>Giá đơn vị: {order.dish_cost.toLocaleString("de-DE")}đ</p>
                 <p>Tổng: {(order.dish_cost * order.dish_quantity).toLocaleString("de-DE")}đ</p>
-                <button
-        className="cancel-button"
-        onClick={() => handleCancelDish(order.id_dish)}
-      >
-        ❌ Hủy món
-      </button>
               </div>
             </div>
           ))
