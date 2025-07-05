@@ -448,20 +448,23 @@ app.delete("/api/employee/delete/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Kiểm tra xem nhân viên có tồn tại không
-    const check = await db.query(`SELECT * FROM login.employee WHERE id_employee = $1`, [id]);
+    // Xoá dữ liệu liên quan trước (nếu có)
+    await db.query(`DELETE FROM login.timekeeping WHERE id_employee = $1`, [id]);
 
-    if (check.rowCount === 0) {
+    // Sau đó xoá nhân viên
+    const result = await db.query(`DELETE FROM login.employee WHERE id_employee = $1`, [id]);
+
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: "Không tìm thấy nhân viên để xoá" });
     }
 
-    await db.query(`DELETE FROM login.employee WHERE id_employee = $1`, [id]);
     return res.status(200).json({ message: "✅ Đã xoá nhân viên thành công" });
   } catch (err) {
-    console.error("❌ Lỗi khi xoá nhân viên:", err);
+    console.error("❌ Lỗi khi xoá nhân viên:", err.stack);
     return res.status(500).json({ error: "Lỗi server khi xoá nhân viên" });
   }
 });
+
 
 
 
