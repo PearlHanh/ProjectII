@@ -176,15 +176,29 @@
   // Delete dish
   app.delete("/api/dish/:id_dish", async (req, res) => {
     const { id_dish } = req.params;
-
+  
+    const client = await db.connect();
     try {
-      await db.query(`DELETE FROM "order".dish WHERE id_dish = $1`, [id_dish]);
-      res.status(200).json({ message: "Xóa thành công" });
+      await client.query("BEGIN");
+  
+      // Xóa món đó khỏi các ordertable (đơn hàng)
+      await client.query(`DELETE FROM "order".ordertable WHERE id_dish = $1`, [id_dish]);
+  
+      // Xóa món ăn khỏi bảng dish
+      await client.query(`DELETE FROM "order".dish WHERE id_dish = $1`, [id_dish]);
+  
+      await client.query("COMMIT");
+  
+      res.status(200).json({ message: "Xóa thành công cả món và đơn hàng liên quan" });
     } catch (err) {
-      console.error("Lỗi khi xóa dish:", err);
-      res.status(500).json({ error: "Lỗi server khi xóa dish" });
+      await client.query("ROLLBACK");
+      console.error("❌ Lỗi khi xóa món ăn:", err);
+      res.status(500).json({ error: "Lỗi server khi xóa món ăn" });
+    } finally {
+      client.release();
     }
   });
+  
   // Delete order
   app.delete("/api/ordertable/delete/:id_table", async (req, res) => {
     const { id_table } = req.params;
