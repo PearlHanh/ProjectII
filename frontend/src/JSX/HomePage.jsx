@@ -806,7 +806,7 @@ const handleDeleteEmployee = async (id_employee) => {
               </table>
             </div>
             <button className="tk-btn"
-            onClick={handleConfirmAttendance}>xác nhận</button>
+            onClick={handleConfirmAttendance}>Xác nhận chấm công</button>
             <button
   className="add-employee-button"
   onClick={() => {
@@ -916,7 +916,7 @@ const handleDeleteEmployee = async (id_employee) => {
         className="update-confirm-button"
         onClick={handleSubmitEmployee}
       >
-        Xác nhận chấm công
+        Xác nhận
       </button>
     </div>
   </div>
