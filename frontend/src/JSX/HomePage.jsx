@@ -594,7 +594,7 @@ const handleDeleteEmployee = async (id_employee) => {
     alert("❌ Lỗi khi xoá nhân viên");
   }
 
-
+}
 
 
 
@@ -1179,4 +1179,4 @@ const handleDeleteEmployee = async (id_employee) => {
       </div>
       </div>
   );
-    }};
+    };
