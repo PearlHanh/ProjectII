@@ -1199,7 +1199,7 @@ const handleCashPayment = async () => {
           </tbody>
         </table>
         <div className="salary-confirm-wrapper">
-  <button onClick={handleSalaryConfirm} className="add-employee-button">
+  <button onClick={handleSalaryConfirm} className="salary-confirm-button">
     ✅ Xác nhận thanh toán
   </button>
 </div>
