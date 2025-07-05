@@ -700,18 +700,14 @@ const handleCashPayment = async () => {
         </div>
       ))
     )}
-   <button
-  className="pay"
-  onClick={handlePay}
->
-Chuyển khoản
-</button>
-<button
-  className="pay2"
-  onClick={handleCashPayment}
->
-Tiền mặt
-</button>
+   <div className="payment-buttons">
+  <button className="pay" onClick={handlePay}>
+    Chuyển khoản
+  </button>
+  <button className="pay2" onClick={handleCashPayment}>
+    Tiền mặt
+  </button>
+</div>
                                   </div>
                           </div>
                       </div>

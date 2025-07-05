@@ -291,7 +291,24 @@
 }
 
 
- 
+.payment-buttons {
+  display: flex;
+  justify-content: center; /* căn giữa theo chiều ngang */
+  gap: 10px; /* khoảng cách giữa 2 nút */
+  margin-top: auto; /* đẩy xuống cuối nếu cha là column */
+  padding: 10px 0;
+}
+
+.pay2 {
+  width: 150px;
+  text-align: center;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 7px;
+  transition: 0.3s ease;
+  cursor: pointer;
+  background-color: #f7f7f7;
+}
 
 .pay {
   width: 150px;
