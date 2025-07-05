@@ -25,6 +25,26 @@ export default function Cart() {
     0
   );
 
+  const handleCancelDish = async (dishID) => {
+    if (!window.confirm("Bạn có chắc muốn huỷ món này?")) return;
+  
+    try {
+      const res = await fetch(`https://projectii-production.up.railway.app/api/ordertable/TB${tableID}/${dishID}`, {
+        method: "DELETE",
+      });
+  
+      if (!res.ok) throw new Error("Không xoá được món");
+  
+      // Cập nhật lại danh sách
+      const updated = await fetch(`https://projectii-production.up.railway.app/api/ordertable/TB${tableID}`).then(r => r.json());
+      setCartOrders(updated);
+  
+      alert("✅ Đã huỷ món khỏi giỏ hàng");
+    } catch (err) {
+      console.error("❌ Lỗi huỷ món:", err);
+      alert("Lỗi khi huỷ món");
+    }
+  };
   return (
     <div className="container">
       <header className="header">🛒 Giỏ Hàng - Table {tableID}</header>
@@ -40,6 +60,12 @@ export default function Cart() {
                 <p>Số lượng: {order.dish_quantity}</p>
                 <p>Giá đơn vị: {order.dish_cost.toLocaleString("de-DE")}đ</p>
                 <p>Tổng: {(order.dish_cost * order.dish_quantity).toLocaleString("de-DE")}đ</p>
+                <button
+        className="cancel-button"
+        onClick={() => handleCancelDish(order.id_dish)}
+      >
+        ❌ Hủy món
+      </button>
               </div>
             </div>
           ))

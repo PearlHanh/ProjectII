@@ -69,6 +69,19 @@
 p {
   font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 1rem;
-  color: #374151; /* Màu xám đậm giống trang Order */
+  color: #b45309; /* Màu xám đậm giống trang Order */
   line-height: 1.5;
+}
+
+.cancel-button {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cancel-button:hover {
+  background-color: #d9363e;
 }

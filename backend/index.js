@@ -467,6 +467,19 @@ app.delete("/api/employee/delete/:id", async (req, res) => {
 
 
 
+app.delete("/api/ordertable/:tableID/:dishID", async (req, res) => {
+  const { tableID, dishID } = req.params;
+  try {
+    await db.query(
+      `DELETE FROM login.ordertable WHERE id_table = $1 AND id_dish = $2`,
+      [tableID, dishID]
+    );
+    res.status(200).json({ message: "✅ Đã xoá món khỏi bàn" });
+  } catch (err) {
+    console.error("❌ Lỗi xoá món trong ordertable:", err);
+    res.status(500).json({ error: "Lỗi server khi xoá món" });
+  }
+});
 
 
 
