@@ -29,14 +29,14 @@ export default function Cart() {
     if (!window.confirm("Bạn có chắc muốn huỷ món này?")) return;
   
     try {
-      const res = await fetch(`https://projectii-production.up.railway.app/api/ordertable/TB${tableID}/${dishID}`, {
+      const res = await fetch(`https://projectii-production.up.railway.app/api/ordertable/${tableID}/${dishID}`, {
         method: "DELETE",
       });
   
       if (!res.ok) throw new Error("Không xoá được món");
   
       // Cập nhật lại danh sách
-      const updated = await fetch(`https://projectii-production.up.railway.app/api/ordertable/TB${tableID}`).then(r => r.json());
+      const updated = await fetch(`https://projectii-production.up.railway.app/api/ordertable/${tableID}`).then(r => r.json());
       setCartOrders(updated);
   
       alert("✅ Đã huỷ món khỏi giỏ hàng");
