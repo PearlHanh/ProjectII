@@ -594,7 +594,9 @@ const handleDeleteEmployee = async (id_employee) => {
     alert("❌ Lỗi khi xoá nhân viên");
   }
 
-}const handleCashPayment = async () => {
+}
+
+const handleCashPayment = async () => {
   const total = orderedDishes.reduce((sum, d) => sum + d.total_cost, 0);
 
   if (!selectedTable) {
@@ -629,7 +631,6 @@ const handleDeleteEmployee = async (id_employee) => {
     alert("Đã xảy ra lỗi khi xoá món. Vui lòng thử lại.");
   }
 };
-
 
 
 
