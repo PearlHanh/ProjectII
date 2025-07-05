@@ -1130,7 +1130,6 @@ const handleCashPayment = async () => {
     <div className="salary-container">
       {/* Header */}
       <div className="table5-header">
-        <h2 className="salary-title">Bảng lương nhân viên</h2>
         <div className="month-selector">
           <label htmlFor="month">Chọn tháng:</label>
           <input
@@ -1199,14 +1198,12 @@ const handleCashPayment = async () => {
             ))}
           </tbody>
         </table>
-        <div className="flex justify-end">
-  <button
-    onClick={handleSalaryConfirm}
-    className="px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-xl shadow-md hover:bg-green-700 transition duration-200"
-  >
+        <div className="salary-confirm-wrapper">
+  <button onClick={handleSalaryConfirm} className="add-employee-button">
     ✅ Xác nhận thanh toán
   </button>
 </div>
+
       </div>
     </div>
   </div>

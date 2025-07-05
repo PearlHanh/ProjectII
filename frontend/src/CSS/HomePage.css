@@ -554,6 +554,25 @@
   transition: background-color 0.2s;
 }
 
+.add-employee-button {
+  position: absolute;
+  bottom: 20px;
+  left: 570px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+}
+
+.add-employee-button:hover {
+  background-color: #0056b3;
+}
+
 .tk-btn:hover {
   background-color: #0056b3;
 }
