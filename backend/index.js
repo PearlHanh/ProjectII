@@ -444,7 +444,7 @@
 
 
 // Xoá nhân viên
-app.delete("/api/employee/:id", async (req, res) => {
+app.delete("/api/employee/delete/:id", async (req, res) => {
   const { id } = req.params;
 
   try {

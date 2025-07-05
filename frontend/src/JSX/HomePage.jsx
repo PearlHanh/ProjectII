@@ -578,7 +578,7 @@ const handleDeleteEmployee = async (id_employee) => {
   if (!window.confirm("❗Bạn có chắc chắn muốn xoá nhân viên này?")) return;
 
   try {
-    const res = await fetch(`https://projectii-production.up.railway.app/api/employee/${id_employee}`, {
+    const res = await fetch(`https://projectii-production.up.railway.app/api/employee/delete/${id_employee}`, {
       method: "DELETE",
     });
 
