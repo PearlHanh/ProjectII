@@ -1143,8 +1143,8 @@ const handleCashPayment = async () => {
       </div>
 
       {/* Body */}
-      <div className="table5-body">
-        <table className="salary-table">
+      <div className="table5-body mb-6">
+        <table className="salary-table mb-4">
           <thead>
             <tr className="bg-gray-100">
               <th>ID</th>
@@ -1199,14 +1199,14 @@ const handleCashPayment = async () => {
             ))}
           </tbody>
         </table>
-        <div className="mt-4 text-right">
-        <button
-          onClick={handleSalaryConfirm}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Xác nhận thanh toán
-        </button>
-      </div>
+        <div className="flex justify-end">
+  <button
+    onClick={handleSalaryConfirm}
+    className="px-6 py-3 bg-green-600 text-white text-lg font-semibold rounded-xl shadow-md hover:bg-green-700 transition duration-200"
+  >
+    ✅ Xác nhận thanh toán
+  </button>
+</div>
       </div>
     </div>
   </div>
