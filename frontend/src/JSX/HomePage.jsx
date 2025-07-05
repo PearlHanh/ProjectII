@@ -594,7 +594,42 @@ const handleDeleteEmployee = async (id_employee) => {
     alert("❌ Lỗi khi xoá nhân viên");
   }
 
-}
+}const handleCashPayment = async () => {
+  const total = orderedDishes.reduce((sum, d) => sum + d.total_cost, 0);
+
+  if (!selectedTable) {
+    alert("❌ Bạn chưa chọn bàn!");
+    return;
+  }
+
+  if (!orderedDishes.length) {
+    alert("❌ Bàn chưa có món nào để thanh toán!");
+    return;
+  }
+
+  if (!window.confirm(`Xác nhận đã nhận ${total.toLocaleString("vi-VN")}đ tiền mặt từ bàn ${selectedTable}?`)) {
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://projectii-production.up.railway.app/api/ordertable/delete/${selectedTable}`, {
+      method: "DELETE",
+    });
+
+    const data = await res.json();
+    console.log("✅ Đã xoá món sau thanh toán tiền mặt:", data);
+
+    // Clear UI
+    setOrderedDishes([]);
+    setSelectedTable(null);
+
+    alert("💵 Đã thanh toán tiền mặt thành công!");
+  } catch (err) {
+    console.error("❌ Lỗi khi thanh toán tiền mặt:", err);
+    alert("Đã xảy ra lỗi khi xoá món. Vui lòng thử lại.");
+  }
+};
+
 
 
 
@@ -668,7 +703,13 @@ const handleDeleteEmployee = async (id_employee) => {
   className="pay"
   onClick={handlePay}
 >
-  Thanh toán
+Chuyển khoản
+</button>
+<button
+  className="pay2"
+  onClick={handleCashPayment}
+>
+Tiền mặt
 </button>
                                   </div>
                           </div>
