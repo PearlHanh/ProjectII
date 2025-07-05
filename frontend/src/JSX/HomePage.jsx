@@ -489,7 +489,7 @@ useEffect(() => {
   const paymentStatus = urlParams.get("status"); // Ví dụ từ PayOS callback
   const payosCode = urlParams.get("code"); // Tùy theo PayOS bạn tích hợp
 
-  if (tableToClear && (paymentStatus === "PAID" || payosCode === "00")) {
+  if (paymentStatus === "PAID") {
     fetch(`https://projectii-production.up.railway.app/api/ordertable/delete/${tableToClear}`, {
       method: "DELETE",
     })
