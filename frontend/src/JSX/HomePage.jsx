@@ -485,23 +485,30 @@ const handlePay = async () => {
 useEffect(() => {
   const tableToClear = localStorage.getItem("pendingClearTable");
 
-  // Nếu có bàn cần xóa (sau khi quay lại từ PayOS)
-  if (tableToClear) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const paymentStatus = urlParams.get("status"); // Ví dụ từ PayOS callback
+  const payosCode = urlParams.get("code"); // Tùy theo PayOS bạn tích hợp
+
+  if (tableToClear && (paymentStatus === "PAID" || payosCode === "00")) {
     fetch(`https://projectii-production.up.railway.app/api/ordertable/delete/${tableToClear}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
         console.log("Đã xoá món sau thanh toán:", data);
-        setOrderedDishes([]); // clear UI
+        setOrderedDishes([]);
         setSelectedTable(null);
         localStorage.removeItem("pendingClearTable");
       })
       .catch((err) => {
         console.error("Lỗi khi xóa món sau thanh toán:", err);
       });
+  } else {
+    console.log("Thanh toán chưa thành công hoặc bị huỷ — không xoá đơn");
+    localStorage.removeItem("pendingClearTable"); // Có thể xoá hoặc giữ tuỳ bạn
   }
 }, []);
+
 
 
 // Tinh tien luong
