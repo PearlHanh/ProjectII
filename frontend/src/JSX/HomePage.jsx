@@ -574,7 +574,25 @@ useEffect(() => {
 
 
 
+const handleDeleteEmployee = async (id_employee) => {
+  if (!window.confirm("❗Bạn có chắc chắn muốn xoá nhân viên này?")) return;
 
+  try {
+    const res = await fetch(`https://projectii-production.up.railway.app/api/employee/${id_employee}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) throw new Error("Xoá thất bại");
+
+    alert("✅ Đã xoá nhân viên");
+
+    // Cập nhật lại danh sách nhân viên
+    const updated = await fetch("https://projectii-production.up.railway.app/api/employee").then(r => r.json());
+    setEmployees(updated);
+  } catch (err) {
+    console.error(err);
+    alert("❌ Lỗi khi xoá nhân viên");
+  }
 
 
 
@@ -740,6 +758,7 @@ useEffect(() => {
                     <th>Vai trò</th>
                     <th>Chấm công</th>
                     <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -773,6 +792,14 @@ useEffect(() => {
                           <RefreshCcw className="w-5 h-5" />
                         </button>
                       </td>
+                      <td>
+                  <button className="delete-button2 flex items-center justify-center p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  onClick={() => handleDeleteEmployee(emp.id_employee)}>
+
+                    <Trash className="w-5 h-5" />
+                  </button>
+                </td>
+                      
                     </tr>
                   ))}
                 </tbody>
@@ -1152,4 +1179,4 @@ useEffect(() => {
       </div>
       </div>
   );
-    };
+    }};

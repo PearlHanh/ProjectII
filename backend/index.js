@@ -442,6 +442,44 @@
     }
   });
 
+
+// Xoá nhân viên
+app.delete("/api/employee/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Kiểm tra xem nhân viên có tồn tại không
+    const check = await db.query(`SELECT * FROM login.employee WHERE id_employee = $1`, [id]);
+
+    if (check.rowCount === 0) {
+      return res.status(404).json({ error: "Không tìm thấy nhân viên để xoá" });
+    }
+
+    await db.query(`DELETE FROM login.employee WHERE id_employee = $1`, [id]);
+    return res.status(200).json({ message: "✅ Đã xoá nhân viên thành công" });
+  } catch (err) {
+    console.error("❌ Lỗi khi xoá nhân viên:", err);
+    return res.status(500).json({ error: "Lỗi server khi xoá nhân viên" });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Lấy danh sách nhân viên đã chấm công thansg nay
 app.get("/api/salary", async (req, res) => {
   const { month } = req.query;
